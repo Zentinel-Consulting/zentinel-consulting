@@ -1,7 +1,7 @@
 <script lang="ts">
     let words = ["dreams", "ideas", "visions", "software"];
     let currentWordIndex = 0;
-    let displayedWord = "";
+    let displayedWord = "innovations";
     let isDeleting = false;
     let typingSpeed = 70; 
     let deletingSpeed = 50;
@@ -30,40 +30,37 @@
     }
 
     function getRandomColor() {
-        const letters = "0123456789ABCDEF";
-        let color = "#";
-        for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
+      const hue = Math.floor(Math.random() * 360);
+      const saturation = 80 + Math.floor(Math.random() * 20);
+      const lightness = 50 + Math.floor(Math.random() * 10);
+      return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
     }
 
-    setTimeout(typeWord, 3000);
+    function initializeWord(){
+      displayedWord = words[currentWordIndex];
+      setTimeout(typeWord, typingSpeed);
+    }
+
+    initializeWord();
 </script>
 
 <div class="landing">
-  <div class="background">
-    <div class="circle circle-1"></div>
-    <div class="circle circle-2"></div>
-  </div>
     <div class="stripe"/>
     <div class="stripe">
       <div class="upper-landing">
         <div class="text-container">
           <div class="text-position">
-            We build
-            <p style="color: {currentColor};">
-              {displayedWord}.
-            </p>
+            <span class="we-build">We build</span>
+            <span class="moving-word" style="color: {currentColor};">{displayedWord}.</span>
           </div>
-          <p>Tell us more about your idea.</p>
+          <p class="idea-text">Tell us more about your idea.</p>
         </div>
       </div>
     </div>
     <div class="stripe">
-      <div class="chat-input">
+      <!-- <div class="chat-input">
         <input type="text" placeholder="I want a website for..." />
-      </div>
+      </div> -->
     </div>
     <div class="stripe"/>
   </div>
@@ -76,59 +73,10 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      background-color: black;
+      background-color: transparent;
       color: white;
       font-size: 3rem;
       overflow: hidden;
-    }
-
-    .background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      overflow: hidden;
-    }
-
-    .circle {
-      position: absolute;
-      width: 40vw;
-      height: 40vw;
-      border-radius: 50%;
-      filter: blur(100px);
-      animation: moveCircles 10s ease-in-out infinite alternate;
-    }
-
-    .circle-1 {
-      background-color: #ff00ff65;
-      left: -25vw;
-      animation-name: moveCircle1;
-    }
-
-    .circle-2 {
-      background-color: #00ffff6b;
-      right: -25vw;
-      animation-name: moveCircle2;
-    }
-
-    @keyframes moveCircle1 {
-      0% {
-        transform: translateX(0);
-      }
-      50%, 100% {
-        transform: translateX(calc(50vw - 25%));
-      }
-    }
-
-    @keyframes moveCircle2 {
-      0%, 50% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(calc(-50vw + 25%));
-      }
     }
   
     .stripe {
@@ -163,13 +111,26 @@
       flex-wrap: wrap;
       margin-bottom: 2rem;
     }
-  
-    .text-position p {
+
+    .we-build {
+      white-space: nowrap;
+    }
+
+    .moving-word {
+      white-space: nowrap;
       margin-left: 1rem;
+    }
+
+    .idea-text {
+      line-height: 3.5rem;
+    }
+  
+
+    .text-position p span {
       white-space: nowrap;
     }
   
-    .chat-input {
+    /* .chat-input {
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: center;
@@ -196,12 +157,12 @@
     .chat-input input:focus {
       outline: none;
       box-shadow: none;
-    }
+    } */
 
   
     @media (max-width: 768px) {
       .landing {
-        font-size: 3rem;
+        font-size: 2rem;
         padding-top: 3rem;
       }
   
@@ -213,20 +174,21 @@
   
       .text-container {
         margin-bottom: 1rem;
-        width: 100%;
+        width: 90%;
       }
   
       .text-position {
-        flex-direction: column;
+        flex-direction: row;
         align-items: flex-start;
-    }
+        gap: 1rem;
+      }
 
-    .text-position p {
+      .moving-word {
         margin-left: 0;
-        margin-top: 1rem;
-    }
-  
-    .chat-input {
+      }
+      
+    
+    /* .chat-input {
         grid-template-columns: 1fr auto;
         padding: 1rem;
         width: 100%;
@@ -236,6 +198,6 @@
         height: 5rem;
         font-size: 1rem;
         width: 100%;
-    }
+    } */
 }
   </style>

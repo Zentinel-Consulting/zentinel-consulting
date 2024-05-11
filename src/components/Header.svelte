@@ -5,34 +5,10 @@
   
     let visible = false;
     let isOpen = false;
-    let iconColor = 'white';
     let hidden = false;
 
     onMount(() => {
       visible = true;
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            iconColor = 'black';
-            hidden = true;
-          } else {
-            iconColor = 'white';
-            hidden = false;
-          }
-        });
-      },
-      {
-        threshold: 0.85,
-      });
-
-      const targetElement = document.getElementById('projects-start');
-      if (targetElement) {
-        observer.observe(targetElement);
-      }
-      
-      return () => observer.disconnect();
-      
     });
     
     const toggleModal = () => {
@@ -46,7 +22,7 @@
       {#if visible}
         <div in:fly={{ x: -200, duration: 2000 }} out:fade>
           <button>
-              <svg width="60" height="60" viewBox="0 0 70 70" fill="{hidden ? "transparent" : iconColor}" xmlns="http://www.w3.org/2000/svg" style="background-color:transparent;">
+              <svg width="50" height="50" viewBox="0 0 70 70" fill="white" xmlns="http://www.w3.org/2000/svg" style="background-color:transparent;">
                   <path d="M49.9399 10.3376L52.7851 13.2236L13.9422 52.5244L11.097 49.6384L49.9399 10.3376Z"/>
                   <path d="M56.5219 17.4756L59.3671 20.3616L20.5242 59.6624L17.6789 56.7764L56.5219 17.4756Z"/>
                   <path d="M59.2841 55.5452V59.6241H34.4552V55.5452H59.2841Z"/>
@@ -57,14 +33,14 @@
       <div in:fly={{ x: 200, duration: 2000 }} out:fade>
         <button on:click={toggleModal}>
           {#if isOpen}
-            <svg width="40" height="40" viewBox="0 0 1024 1024" class="icon" xmlns="http://www.w3.org/2000/svg">
+            <svg width="30" height="30" viewBox="0 0 1024 1024" class="icon" xmlns="http://www.w3.org/2000/svg">
               <path fill="#ffffff" d="M764.288 214.592L512 466.88 259.712 214.592a31.936 31.936 0 00-45.12 45.12L466.752 
               512 214.528 764.224a31.936 31.936 0 1045.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0045.12-45.12L557.12 
               512.064l252.288-252.352a31.936 31.936 0 10-45.12-45.184z"/>
             </svg>
           {:else}
             <svg width="35" height="35" viewBox="0 0 1024 1024" class="icon" xmlns="http://www.w3.org/2000/svg">
-              <path fill={iconColor} d="M160 448a32 32 0 01-32-32V160.064a32 32 0 0132-32h256a32 32 0 0132 32V416a32 32 0 01-32 
+              <path fill="white" d="M160 448a32 32 0 01-32-32V160.064a32 32 0 0132-32h256a32 32 0 0132 32V416a32 32 0 01-32 
               32H160zm448 0a32 32 0 01-32-32V160.064a32 32 0 0132-32h255.936a32 32 0 0132 32V416a32 32 0 01-32 32H608zM160 
               896a32 32 0 01-32-32V608a32 32 0 0132-32h256a32 32 0 0132 32v256a32 32 0 01-32 32H160zm448 0a32 32 0 01-32-32V608a32 
               32 0 0132-32h255.936a32 32 0 0132 32v256a32 32 0 01-32 32H608z"/>
@@ -109,7 +85,7 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        height: 10vh;
+        height: 3vh;
         z-index: 100; 
         padding-top: 2rem;  
     }
@@ -123,9 +99,11 @@
         padding-right: 2rem;
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
-        /* backdrop-filter: blur(1000px); */
-        background-color: transparent;
+        backdrop-filter: blur(7px);
+        background-color: rgba(255, 255, 255, 0);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         border-radius: 10rem;
+        -webkit-backdrop-filter: blur(7px);
     }
 
     .header-casing button {
@@ -225,7 +203,7 @@
         .header {
             padding-left: 0rem;
             padding-right: 0rem;
-            padding-top: 1rem;
+            padding-top: 3rem;
         }
 
         .header-casing {
