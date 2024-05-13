@@ -1,5 +1,11 @@
 <script lang="ts">
     import UseCases from "./UseCases.svelte";
+    import educationbkg from '$lib/assets/education.png';
+    import retailbkg from '$lib/assets/retail.png';
+    import healthcarebkg from '$lib/assets/healthcare.png';
+    import financebkg from '$lib/assets/finance.png';
+    import marketingbkg from '$lib/assets/marketing.png';
+    import manufacturingbkg from '$lib/assets/manufacturing.png';
 
     let services = [
       { id: 1, title: 'Education' },
@@ -12,22 +18,22 @@
 
     let servicesSentences = [
         { id: 1, sentences: ['Game development.', 'Data analysis.', 'Data visualization.', 'Platform & tooling.'] },
-        { id: 2, sentences: ['Retail is detail.', 'Retail is the sale of goods to consumers.'] },
-        { id: 3, sentences: ['Healthcare is the maintenance or improvement of health.', 'Healthcare is the organized provision of medical care to individuals.'] },
-        { id: 4, sentences: ['Marketing is the process of promoting products or services.', 'Marketing is the action or business of promoting and selling products or services.'] },
-        { id: 5, sentences: ['Finance is the management of money.', 'Finance is the science of managing money.'] },
-        { id: 6, sentences: ['Manufacturing is the production of goods.', 'Manufacturing is the making of goods by manual labor or by machinery.'] },
+        { id: 2, sentences: ['Ecommerce', 'Inventory management', 'Customer service', 'Supply chain management.'] },
+        { id: 3, sentences: ['EHR', 'Eprescription software', 'Patient management'] },
+        { id: 4, sentences: ['Digital marketing', 'Social media marketing', 'Content marketing', 'Email marketing'] },
+        { id: 5, sentences: ['Banking', 'Insurance', 'Investment', 'Accounting'] },
+        { id: 6, sentences: ['Inventory management', 'Supply chain management', 'Quality control', 'Customer service']},
     ];
 
-    // let servicesImages = [
-    //     { id: 1, image: './plain-black.jpg' },
-    //     { id: 2, image: './plain-black.jpg' },
-    //     { id: 3, image: './plain-black.jpg' },
-    //     { id: 4, image: './plain-black.jpg' },
-    //     { id: 5, image: './plain-black.jpg' },
-    //     { id: 6, image: './plain-black.jpg' },
+    let servicesImages = [
+        { id: 1, image: educationbkg },
+        { id: 2, image: retailbkg },
+        { id: 3, image: healthcarebkg },
+        { id: 4, image: marketingbkg },
+        { id: 5, image: financebkg },
+        { id: 6, image: manufacturingbkg },
     
-    // ];
+    ];
 </script>
 
 
@@ -38,7 +44,7 @@
             <button> Explore our projects &rarr; </button>
         </div>
         <div class="tiles">
-            <UseCases {services} {servicesSentences}/>
+            <UseCases {services} {servicesSentences} {servicesImages}/>
         </div>
     </div>
 </div>

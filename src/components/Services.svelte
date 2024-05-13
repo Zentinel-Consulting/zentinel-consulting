@@ -1,39 +1,31 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
+    import aIimage from '$lib/assets/abstract.jpg';
+    import webdev from '$lib/assets/webdev.jpg';
+    import mobiledev from '$lib/assets/mobiledev.jpg';
+    import dataanalysis from '$lib/assets/dataanalysis.webp';
+
     import Service from './Service.svelte';
-  
-    let rightContent: HTMLElement;
-    let isLeftSectionIntersecting = false;
-  
-    onMount(() => {
-        const leftStickyElement = document.querySelector('.left-sticky') as HTMLElement;
-        if (leftStickyElement) {
-            const observer = new IntersectionObserver(
-            (entries) => {
-                isLeftSectionIntersecting = entries[0].isIntersecting;
-            },
-            { threshold: 1 }
-            );
-            observer.observe(leftStickyElement);
-        }
-    });
 
     let services = [
         {
             title: 'Web development',
-            points: ['Svelte', 'React', 'Responsive design', 'Node.js', 'TypeScript', 'SEO optimization', 'E-commerce', 'Web applications', 'APIs']
+            points: ['Svelte', 'React', 'Responsive design', 'Node.js', 'TypeScript', 'SEO optimization', 'E-commerce', 'Web applications', 'APIs'],
+            image: webdev
         },
         {
             title: 'Mobile development',
-            points: ['iOS', 'Android', 'React Native', 'Swift', 'Kotlin', 'Mobile applications', 'APIs']
+            points: ['iOS', 'Android', 'React Native', 'Swift', 'Kotlin', 'Mobile applications', 'APIs'],
+            image: mobiledev
         },
         {
             title: 'AI solutions',
-            points: ['Machine learning', 'Deep learning', 'Computer vision', 'Natural language processing', 'Data analysis']
+            points: ['Machine learning', 'Deep learning', 'Computer vision', 'Natural language processing', 'Data analysis'],
+            image: aIimage
         },
         {
             title: 'Data analysis',
-            points: ['Data visualization', 'Data cleaning', 'Data processing', 'Data analysis', 'Data interpretation']
+            points: ['Data visualization', 'Data cleaning', 'Data processing', 'Data analysis', 'Data interpretation'],
+            image: dataanalysis
         },
     ];
 
@@ -49,9 +41,9 @@
       </div>
     </div>
   
-    <div class="right-content" bind:this={rightContent} class:scrollable={isLeftSectionIntersecting}>
+    <div class="right-content">
         {#each services as service, i}
-            <Service title={service.title} points={service.points} />
+            <Service title={service.title} points={service.points} image={service.image} />
         {/each}
     </div>
   </div>
@@ -63,7 +55,7 @@
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        height: 100vh;
+        height: 97vh;
         background-color: #f5f5f5;
         border-radius: 2rem;
     }
@@ -72,7 +64,8 @@
         position: sticky;
         top: 0;
         width: 30%;
-        height: 100vh;
+        height: 97vh;
+        border-top-left-radius: 2rem;
         background-color: white;
     }
 
@@ -114,16 +107,34 @@
         cursor: pointer;
         color: black;
         font-size: 1.2rem;
+        position: relative;
+        overflow: hidden;
+        transition: color 0.3s;
+    }
+
+    .start-button button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background-color: black;
+        transition: width 0.3s;
+        z-index: -1;
     }
 
     .start-button button:hover {
-        background-color: black;
         color: white;
+    }
+
+    .start-button button:hover::before {
+        width: 100%;
     }
 
     .right-content {
         width: 70%;
-        height: 100vh;
+        height: 97vh;
         overflow-y: scroll;
         -ms-overflow-style: none;
         scrollbar-width: none;
@@ -133,9 +144,6 @@
         align-items: center;
     }
 
-    .right-content.scrollable {
-        overflow-y: scroll;
-    }
 
     .right-content::-webkit-scrollbar {
         display: none;

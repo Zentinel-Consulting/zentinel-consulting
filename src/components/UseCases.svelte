@@ -1,15 +1,16 @@
 <script lang="ts">
-    import { tick } from 'svelte';
+    import { tick, onDestroy } from 'svelte';
     import { gsap } from 'gsap/dist/gsap';
     import { Flip } from 'gsap/dist/Flip';
   
     export let services: { id: number, title: string }[] = [];
     export let servicesSentences: { id: number, sentences: string[] }[] = [];
-    // export let servicesImages: { id: number, image: string }[] = [];
+    export let servicesImages: { id: number, image: string }[] = [];
   
     gsap.registerPlugin(Flip);
   
     let selected = 1;
+    let currentIndex = 0;
   
     async function flip(id: number) {
       const state = Flip.getState('.grid-item');
@@ -26,19 +27,28 @@
 
     let randomColors: string[] = [];
 
-    function generateRandomColor() {
-        const hue1 = Math.floor(Math.random() * 360);
-        const hue2 = Math.floor(Math.random() * 360);
-        const saturation = 20 + Math.floor(Math.random() * 30);
-        const lightness = 20 + Math.floor(Math.random() * 20);
-        const color1 = `hsl(${hue1}, ${saturation}%, ${lightness}%)`;
-        const color2 = `hsl(${hue2}, ${saturation}%, ${lightness}%)`;
-        const angle = Math.floor(Math.random() * 360);
-        return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
-    }
+    // function generateRandomColor() {
+    //     const hue1 = Math.floor(Math.random() * 360);
+    //     const hue2 = Math.floor(Math.random() * 360);
+    //     const saturation = 30 + Math.floor(Math.random() * 30);
+    //     const lightness = 30 + Math.floor(Math.random() * 20);
+    //     const color1 = `hsl(${hue1}, ${saturation}%, ${lightness}%)`;
+    //     const color2 = `hsl(${hue2}, ${saturation}%, ${lightness}%)`;
+    //     const angle = Math.floor(Math.random() * 360);
+    //     return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
+    // }
 
-    services.forEach(() => {
-        randomColors.push(generateRandomColor());
+    // services.forEach(() => {
+    //     randomColors.push(generateRandomColor());
+    // });
+
+    const intervalId = setInterval(() => {
+        currentIndex = (currentIndex + 1) % services.length;
+        flip(services[currentIndex].id);
+    }, 5000); 
+
+    onDestroy(() => {
+        clearInterval(intervalId);
     });
   </script>
 
@@ -50,7 +60,7 @@
         <button
           class="grid-item"
           class:selected={service.id === selected}
-          style="background-image: {randomColors[service.id - 1]};"
+          style="background-image: url({servicesImages.find(s => s.id === service.id)?.image});"
           on:click={() => flip(service.id)}
         >
           <div class="item-content">
