@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { PromtBox } from "zentinel-ui";
     let words = ["dreams", "ideas", "visions", "software"];
     let currentWordIndex = 0;
     let displayedWord = "innovations";
@@ -54,7 +55,16 @@
             <span class="moving-word" style="color: {currentColor};">{displayedWord}.</span>
           </div>
           <p class="idea-text">Tell us more about your idea.</p>
-        </div>
+          <div
+            class="prompt-container"
+          >
+            <PromtBox
+              theme_color = "white"
+              oc_height = "100%"
+            >
+            </PromtBox>
+          </div>
+      </div>
       </div>
     </div>
     <div class="stripe">
@@ -78,7 +88,7 @@
       font-size: 3rem;
       overflow: hidden;
     }
-  
+
     .stripe {
       flex: 1;
       width: 100%;
@@ -102,6 +112,10 @@
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
+    }
+    .prompt-container{
+      width: 100%;
+      height:12vh;
     }
 
     .text-position {
