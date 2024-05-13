@@ -55,15 +55,6 @@
             <span class="moving-word" style="color: {currentColor};">{displayedWord}.</span>
           </div>
           <p class="idea-text">Tell us more about your idea.</p>
-          <div
-            class="prompt-container"
-          >
-            <PromtBox
-              theme_color = "white"
-              oc_height = "100%"
-            >
-            </PromtBox>
-          </div>
       </div>
       </div>
     </div>
@@ -71,6 +62,13 @@
       <!-- <div class="chat-input">
         <input type="text" placeholder="I want a website for..." />
       </div> -->
+      <div class="prompt-container">
+            <PromtBox
+              theme_color = "white"
+              oc_height = "100%"
+            >
+            </PromtBox>
+          </div>
     </div>
     <div class="stripe"/>
   </div>
@@ -114,8 +112,8 @@
       align-items: flex-start;
     }
     .prompt-container{
-      width: 100%;
-      height:12vh;
+      width: 60%;
+      height:15vh;
     }
 
     .text-position {
@@ -123,7 +121,7 @@
       flex-direction: row;
       align-items: center;
       flex-wrap: wrap;
-      margin-bottom: 2rem;
+      margin-bottom: 0rem;
     }
 
     .we-build {
@@ -199,6 +197,11 @@
 
       .moving-word {
         margin-left: 0;
+      }
+
+      .prompt-container{
+        width: 90%;
+        height: 20vh;
       }
       
     

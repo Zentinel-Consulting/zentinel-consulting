@@ -56,21 +56,21 @@
     <div in:fly={{y:-100, duration: 1000 }} out:fade class="modal-menu">
         <div class="menu-items">
           <a href="/" class="menu-nav-link">
-              <span class="link-text">Services</span>
+              <span class="link-text">services</span>
               <span class="arrow">&larr;</span>
           </a>
           <a href="/" class="menu-nav-link">
-              <span class="link-text">Projects</span>
+              <span class="link-text">our work</span>
               <span class="arrow">&larr;</span>
           </a>
           <a href="/" class="menu-nav-link">
-              <span class="link-text">Process</span>
+              <span class="link-text">contact</span>
               <span class="arrow">&larr;</span>
           </a>
           <a href="/" class="menu-nav-link">
-              <span class="link-text">Why Zentinel</span>
-              <span class="arrow">&larr;</span>
-          </a>
+            <span class="link-text">login</span>
+            <span class="arrow">&larr;</span>
+        </a>
       </div>
     </div>
 {/if}
@@ -216,7 +216,11 @@
 
         .menu-items {
           margin-bottom: 5rem;
-          margin-right: 0;
+          margin-right: 2rem;
+        }
+
+        .arrow {
+          display: none;
         }
     }
 </style>
