@@ -1,20 +1,32 @@
 <script lang="ts">
+  import { page } from '$app/stores';
 	import Header from '../components/Header.svelte';
-    import MouseFollower from '../components/MouseFollower.svelte';
+  import MouseFollower from '../components/MouseFollower.svelte';
+
+  let pagePath;
+  $: {
+    pagePath = $page.url.pathname;
+    console.log(pagePath);
+  }
+  
     
 </script>
   
-<div class="main-content">
-    <div class="background">
-        <div class="circle circle-1"></div>
-        <div class="circle circle-2"></div>
-      </div>
-    <Header />
-    <main class="content">
-        <slot />
-    </main>
-    <MouseFollower />
-</div>
+{#if pagePath.startsWith('/aichat')}
+  <slot/>
+{:else}
+  <div class="main-content">
+      <div class="background">
+          <div class="circle circle-1"></div>
+          <div class="circle circle-2"></div>
+        </div>
+      <Header />
+      <main class="content">
+          <slot />
+      </main>
+      <MouseFollower />
+  </div>
+{/if}
 
 
 <style>
