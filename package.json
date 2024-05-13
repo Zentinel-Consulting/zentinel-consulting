@@ -35,6 +35,6 @@
 	"type": "module",
 	"dependencies": {
 		"gsap": "^3.12.5",
-		"zentinel-ui": "^0.0.22"
+		"zentinel-ui": "^0.0.23"
 	}
 }
