@@ -6,7 +6,7 @@
   let buttonRect;
 
   const scale = tweened(0, {
-    duration: 1000,
+    duration: 200,
     easing: cubicInOut
   });
 
