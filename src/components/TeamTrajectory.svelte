@@ -77,7 +77,7 @@
       align-items: center;
       justify-content: center;
 
-      height: 50vh;
+      min-height: 50vh;
       padding: 2rem;
       background-color: black;
       font-family: Arial, sans-serif;
@@ -100,5 +100,32 @@
   }
   .column-container {
     width: 13%; 
+  }
+  @media only screen and (max-width: 1754px){
+    .content-container {
+        width: 80%;
+    }
+  }
+  @media only screen and (max-width: 1074px){
+    .content-container {
+        width: 95%;
+    }
+  }
+  @media only screen and (max-width: 919px){
+    .column-container {
+      width: 20%; 
+    }
+  }
+  @media only screen and (max-width: 611px){
+    .columns-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      width: 100%;
+    }
+    .column-container {
+      width: 100%; 
+    }
   }
 </style>
