@@ -5,6 +5,7 @@
     import Quote from "../components/Quote.svelte";
 	  import Services from "../components/Services.svelte";
 	  import ProjectApproach from "../components/ProjectApproach.svelte";
+	  import TeamTrajectory from "../components/TeamTrajectory.svelte";
   
   </script>
   
@@ -15,6 +16,7 @@
     <Services />
     <Partners />
     <ProjectApproach />
+    <TeamTrajectory />
   </div>
   
   
