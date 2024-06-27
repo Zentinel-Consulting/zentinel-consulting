@@ -15,8 +15,8 @@
     function updateFollower() {
       const dx = mouseX - followerX;
       const dy = mouseY - followerY;
-      followerX += dx * 0.1;
-      followerY += dy * 0.1;
+      followerX += dx * 0.7;
+      followerY += dy * 0.7;
       animationFrameId = requestAnimationFrame(updateFollower);
     }
   

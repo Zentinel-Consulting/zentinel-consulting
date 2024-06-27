@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { PromtBox } from "zentinel-ui";
+    //import { PromtBox } from "zentinel-ui";
     let words = ["dreams", "ideas", "visions", "software"];
     let currentWordIndex = 0;
     let displayedWord = "innovations";
@@ -54,7 +54,7 @@
             <span class="we-build">We build</span>
             <span class="moving-word" style="color: {currentColor};">{displayedWord}.</span>
           </div>
-          <p class="idea-text">Tell us more about your idea.</p>
+          <p class="idea-text">Empower your business with our innovative solutions and ideas.</p>
       </div>
       </div>
     </div>
@@ -62,20 +62,21 @@
       <!-- <div class="chat-input">
         <input type="text" placeholder="I want a website for..." />
       </div> -->
-      <div class="prompt-container">
+      <!-- <div class="prompt-container">
             <PromtBox
               theme_color = "white"
               oc_height = "100%"
             >
             </PromtBox>
-          </div>
+      </div> -->
     </div>
-    <div class="stripe"/>
+    <!-- <div class="stripe"/> -->
   </div>
   
   <style>
     .landing {
       position: relative;
+      /* full screen height */
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -111,10 +112,11 @@
       justify-content: center;
       align-items: flex-start;
     }
-    .prompt-container{
+
+    /* .prompt-container{
       width: 60%;
       height:15vh;
-    }
+    } */
 
     .text-position {
       display: flex;
@@ -134,7 +136,10 @@
     }
 
     .idea-text {
-      line-height: 3.5rem;
+      line-height: 5rem;
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      font-weight: 300;
     }
   
 
@@ -186,23 +191,29 @@
   
       .text-container {
         margin-bottom: 1rem;
-        width: 90%;
+        width: 100%;
       }
   
       .text-position {
         flex-direction: row;
         align-items: flex-start;
-        gap: 1rem;
+        gap: 0.5rem;
+        font-size: 1.8rem;
       }
 
       .moving-word {
         margin-left: 0;
       }
 
-      .prompt-container{
+      .idea-text {
+        font-size: 1.3rem;
+        line-height: 2rem;
+      }
+
+      /* .prompt-container{
         width: 90%;
         height: 20vh;
-      }
+      } */
       
     
     /* .chat-input {

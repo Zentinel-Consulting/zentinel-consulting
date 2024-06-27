@@ -3,7 +3,7 @@
 	import Header from '../components/Header.svelte';
   import MouseFollower from '../components/MouseFollower.svelte';
 
-  let pagePath;
+  let pagePath: never
   $: {
     pagePath = $page.url.pathname;
     console.log(pagePath);
