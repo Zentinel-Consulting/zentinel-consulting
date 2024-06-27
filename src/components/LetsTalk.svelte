@@ -93,6 +93,7 @@
   .labels-container p {
     margin: 0;
     padding: 0;
+    text-align: center;
   }
 
   .header-one {
@@ -117,5 +118,39 @@
     background-color: transparent;
     border: 2px solid black;
     cursor: pointer;
+  }
+  @media only screen and (max-width: 400px){
+    .header-one {
+      font-size: 30px;
+    }
+
+    .header-two {
+      font-size: 15px;
+    }
+  }
+  @media only screen and (max-height: 800px){
+    .content-container {
+      top: 25%;
+    }
+  }
+  @media only screen and (max-height: 700px){
+    .content-container {
+      top: 22%;
+    }
+  }
+  @media only screen and (max-height: 460px){
+    .content-container {
+      top: 20%;
+    }
+  }
+  @media only screen and (max-height: 400px){
+    .content-container {
+      top: 10%;
+    }
+  }
+  @media only screen and (max-height: 300px){
+    .content-container {
+      top: 5%;
+    }
   }
 </style>
