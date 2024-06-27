@@ -1,18 +1,20 @@
 <script>
     import Landing from "../components/Landing.svelte";
 	  import Partners from "../components/Partners.svelte";
-	  import Projects from "../components/Projects.svelte";
+	  import UseCases from "../components/UseCases.svelte";
     import Quote from "../components/Quote.svelte";
 	  import Services from "../components/Services.svelte";
+	  import ProjectApproach from "../components/ProjectApproach.svelte";
   
   </script>
   
   <div class="main-content">
     <Landing />
-    <Projects />
+    <UseCases />
     <Quote />
     <Services />
     <Partners />
+    <ProjectApproach />
   </div>
   
   

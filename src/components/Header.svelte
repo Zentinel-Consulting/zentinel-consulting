@@ -5,24 +5,31 @@
   
     let visible = false;
     let isOpen = false;
-    let hidden = false;
+    let prevScrollPos = 0;
 
     onMount(() => {
       visible = true;
+      window.addEventListener('scroll', handleScroll);
     });
     
     const toggleModal = () => {
       isOpen = !isOpen;
     };
+
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      visible = prevScrollPos > currentScrollPos;
+      prevScrollPos = currentScrollPos;
+    };
  
   </script>
   
-  <header class="header">
+  <header class="header" class:visible >
     <div class="header-casing">
       {#if visible}
-        <div in:fly={{ x: -200, duration: 2000 }} out:fade>
+        <div out:fade>
           <button>
-              <svg width="50" height="50" viewBox="0 0 70 70" fill="white" xmlns="http://www.w3.org/2000/svg" style="background-color:transparent;">
+              <svg width="30" height="30" viewBox="0 0 70 70" fill="white" xmlns="http://www.w3.org/2000/svg" style="background-color:transparent;">
                   <path d="M49.9399 10.3376L52.7851 13.2236L13.9422 52.5244L11.097 49.6384L49.9399 10.3376Z"/>
                   <path d="M56.5219 17.4756L59.3671 20.3616L20.5242 59.6624L17.6789 56.7764L56.5219 17.4756Z"/>
                   <path d="M59.2841 55.5452V59.6241H34.4552V55.5452H59.2841Z"/>
@@ -30,16 +37,16 @@
               </svg>
           </button>
         </div>
-      <div in:fly={{ x: 200, duration: 2000 }} out:fade>
+      <div out:fade>
         <button on:click={toggleModal}>
           {#if isOpen}
-            <svg width="30" height="30" viewBox="0 0 1024 1024" class="icon" xmlns="http://www.w3.org/2000/svg">
+            <svg width="20" height="20" viewBox="0 0 1024 1024" class="icon" xmlns="http://www.w3.org/2000/svg">
               <path fill="#ffffff" d="M764.288 214.592L512 466.88 259.712 214.592a31.936 31.936 0 00-45.12 45.12L466.752 
               512 214.528 764.224a31.936 31.936 0 1045.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0045.12-45.12L557.12 
               512.064l252.288-252.352a31.936 31.936 0 10-45.12-45.184z"/>
             </svg>
           {:else}
-            <svg width="35" height="35" viewBox="0 0 1024 1024" class="icon" xmlns="http://www.w3.org/2000/svg">
+            <svg width="20" height="20" viewBox="0 0 1024 1024" class="icon" xmlns="http://www.w3.org/2000/svg">
               <path fill="white" d="M160 448a32 32 0 01-32-32V160.064a32 32 0 0132-32h256a32 32 0 0132 32V416a32 32 0 01-32 
               32H160zm448 0a32 32 0 01-32-32V160.064a32 32 0 0132-32h255.936a32 32 0 0132 32V416a32 32 0 01-32 32H608zM160 
               896a32 32 0 01-32-32V608a32 32 0 0132-32h256a32 32 0 0132 32v256a32 32 0 01-32 32H160zm448 0a32 32 0 01-32-32V608a32 
@@ -87,29 +94,34 @@
         width: 100%;
         height: 3vh;
         z-index: 100; 
-        padding-top: 2rem;  
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateY(-100%);
     }
+
+    .header.visible {
+        transform: translateY(0);
+    }
+
 
     .header-casing {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 90%;
+        width: 100%;
         padding-left: 2rem;
         padding-right: 2rem;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
         backdrop-filter: blur(7px);
-        background-color: rgba(255, 255, 255, 0);
+        background-color:rgba(0, 0, 0, 0.356);
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        border-radius: 10rem;
-        -webkit-backdrop-filter: blur(7px);
+        -webkit-backdrop-filter: blur(7px); 
     }
 
     .header-casing button {
         background-color: transparent;
         border: none;
         cursor: pointer;
+        padding-top: 2rem;
+        padding-bottom: 0.5rem;
     }
 
     .modal-menu {
@@ -203,11 +215,11 @@
         .header {
             padding-left: 0rem;
             padding-right: 0rem;
-            padding-top: 3rem;
+            width: calc(100% - 17px); 
         }
 
         .header-casing {
-            width: 80%;
+            width: 100%;
         }
 
         .modal-menu {
