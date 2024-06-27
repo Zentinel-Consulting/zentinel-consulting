@@ -6,6 +6,7 @@
 	  import Services from "../components/Services.svelte";
 	  import ProjectApproach from "../components/ProjectApproach.svelte";
 	  import TeamTrajectory from "../components/TeamTrajectory.svelte";
+	  import LetsTalk from "../components/LetsTalk.svelte";
   
   </script>
   
@@ -17,6 +18,7 @@
     <Partners />
     <ProjectApproach />
     <TeamTrajectory />
+    <LetsTalk />
   </div>
   
   
