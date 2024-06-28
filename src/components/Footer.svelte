@@ -1,6 +1,25 @@
 <script>
-  // Define the number of lines
-  let lines = Array(40).fill(0);
+  import { onMount } from 'svelte';
+
+  let lines = [];
+
+  // Function to calculate the number of lines
+  function calculateLines() {
+    const containerHeight = document.querySelector('.zebra-container').clientHeight;
+    const targetHeight = 0.9 * containerHeight; // 90% of container height
+    let currentHeight = 0;
+    let lineIndex = 0;
+    
+    while (currentHeight < targetHeight) {
+      const margin = (40 - lineIndex) * 0.00055 * containerHeight; // 0.04% of container height
+      const height = lineIndex * 0.00055 * containerHeight; // 0.04% of container height
+      currentHeight += margin + height;
+      lines[lineIndex] = { margin, height };
+      lineIndex++;
+    }
+    
+    lines = lines.slice(0, lineIndex); // Trim any excess lines
+  }
 
   // Custom easing function
   function easeInOutCubic(t) {
@@ -29,8 +48,13 @@
 
     requestAnimationFrame(scroll);
   }
-</script>
 
+  onMount(() => {
+    calculateLines();
+    window.addEventListener('resize', calculateLines);
+    return () => window.removeEventListener('resize', calculateLines);
+  });
+</script>
 
 <svelte:head>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -129,11 +153,11 @@
 
   <!-- Zebra design -->
   <div class="zebra-container">
-    {#each lines as _, index}
-      <div
-        class="zebra-line"
-        style="--margin: {(40 - index) * 0.04}%; --height: {index * 0.04}%;"
-      ></div>
+    {#each lines as line, index}
+    <div
+      class="zebra-line"
+      style="margin-top: {line.height}px; height: {line.margin}px;"
+    ></div>
     {/each}
   </div>
 </div>
@@ -302,8 +326,8 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 70%;
     background-color: white;
+    flex-grow: 1;
   }
   .zebra-line {
     background-color: black;
@@ -311,5 +335,120 @@
     height: var(--margin);
     margin-top: var(--height);
   }
-</style>
 
+  @media only screen and (max-width: 1300px){
+    .socialn-list {
+      width: 70%;
+    }
+  }
+  @media only screen and (max-width: 1200px){
+    .newsletter-container {
+      width: 60%;
+    }
+  }
+  @media only screen and (max-height: 950px){
+    .input-field-container button span{
+      font-size: 30px;
+    }
+  }
+  @media only screen and (max-height: 840px){
+    .input-field-container button span{
+      font-size: 25px;
+    }
+  }
+  @media only screen and (max-height: 730px){
+    .input-field-container button span{
+      font-size: 20px;
+    }
+  }
+  @media only screen and (max-height: 500px){
+    .newsletter-label {
+      font-size: 15px;
+    }
+    .input-field-container button span{
+      font-size: 25px;
+    }
+  }
+  @media only screen and (max-width: 900px){
+    .socialn-list {
+      width: 90%;
+    }
+  }
+  @media only screen and (max-width: 1050px){
+    .newsletter-container {
+      height: 80%;
+    }
+  }
+  @media only screen and (max-width: 760px){
+    .newsletter-container {
+      width: 80%;
+    }
+  }
+  @media only screen and (max-width: 720px){
+    .footer-content {
+      height: 50%;
+    }
+    .upper-content {
+      height: 75%;
+    }
+    .newsletter-container {
+      height: 70%;
+    }
+    .lower-content {
+      height: 25%;
+      align-items: center;
+      flex-direction: column; 
+    }
+    .lower-content .upper-content-container{
+      width: 90%;
+    }
+    .lower-content .upper-content-container .upper-content-middle-box{
+      height: 100%;
+    }
+    .label-co {
+      flex-direction: row;
+      justify-content: center;
+      align-items: end;
+    }
+    .label-co p{
+      font-size: 15px;
+    }
+    .label-co span{
+      font-size: 15px;
+    }
+  }
+  @media only screen and (max-width: 620px){
+    .upper-content {
+      flex-direction: column;
+    }
+    .upper-content .left-content {
+      height: 30%;
+      width: 100%;
+      flex-direction: row;
+    }
+    .upper-content-middle-box-left {
+      justify-content: center;
+    }
+    .newsletter-container {
+      width: 95%;
+      height: 90%;
+    }
+    .upper-content .right-content {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  @media only screen and (max-width: 400px){
+    .socialn-list {
+      width: 100%;
+    }
+    .socialn-list a {
+      font-size: 15px;
+    }
+  }
+  @media only screen and (max-height: 720px){
+    .footer-content {
+      height: 50%;
+    }
+  }
+</style>
