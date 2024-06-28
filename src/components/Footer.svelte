@@ -49,11 +49,23 @@
     requestAnimationFrame(scroll);
   }
 
+  function debounce(func, wait) {
+    let timeout;
+    return function() {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        func.apply(this, arguments);
+      }, wait);
+    };
+  }
+
+  // Recalculate lines on window resize with debouncing
   onMount(() => {
     calculateLines();
-    window.addEventListener('resize', calculateLines);
+    window.addEventListener('resize', debounce(calculateLines, 200)); // Adjust delay as needed
     return () => window.removeEventListener('resize', calculateLines);
   });
+
 </script>
 
 <svelte:head>
