@@ -36,15 +36,66 @@
           in:fade={{ duration: 300 }}
           out:fade={{duration: 300 }}
         >
-          <p class="step-label">Personal Data</p>
-          <FormInput />
+          <p class="step-label">Howdy!</p>
+          <div
+            class="inputs-container"
+          >
+            <div class="form-spacer"/>
+            <p class="section-description-label">Tell us a bit about yourself so we can connect and collaborate. Your name, email, and a bit about where you work will do the trick!</p>
+            <div class="form-spacer"/>
+            <FormInput placeholder_t="What's your name?" />
+            <div class="form-spacer"/>
+            <FormInput placeholder_t="What's your last name?" />
+            <div class="form-spacer"/>
+            <FormInput placeholder_t="What's your email?" />
+            <div class="form-spacer"/>
+            <FormInput placeholder_t="What's the name of your company?" />
+            <div class="form-spacer"/>
+            <FormInput placeholder_t="What's your job title?" />
+          </div>
         </div>
       {/if}
       {#if currentStep === 1}
-        <p in:fade={{ duration: 300 }} out:fade={{ duration: 300 }}>Content for Step 2</p>
+        <div
+          class="step-content"
+          in:fade={{ duration: 300 }}
+          out:fade={{duration: 300 }}
+        >
+          <p class="step-label">Timeframe</p>
+          <div
+            class="inputs-container"
+          >
+            <div class="form-spacer"/>
+            <p class="section-description-label">When do you want to kick off and wrap up your project? Let’s pencil in those key dates.</p>
+            <div class="form-spacer"/>
+            <div
+              class="dates-row"
+            >
+              <div class="dates-cell">
+                <FormInput type_t="date" />
+              </div>
+              <div class="dates-cell">
+                <FormInput type_t="date" />
+              </div>
+            </div>
+          </div>
+        </div>
       {/if}
       {#if currentStep === 2}
-        <p in:fade={{ duration: 300 }} out:fade={{ duration: 300 }}>Content for Step 3</p>
+        <div
+          class="step-content"
+          in:fade={{ duration: 300 }}
+          out:fade={{duration: 300 }}
+        >
+          <p class="step-label">What Can We Build Together? </p>
+          <div
+            class="inputs-container"
+          >
+            <div class="form-spacer"/>
+            <p class="section-description-label">Tell us about your vision. What type of service are you looking for, and give us a brief description of your dream project.</p>
+            <div class="form-spacer"/>
+          </div>
+        </div>
       {/if}
       {#if currentStep === 3}
         <p in:fade={{ duration: 300 }} out:fade={{ duration: 300 }}>Content for Step 4</p>
@@ -100,6 +151,8 @@
     background-color: blue;
   }
   .step-content {
+    display: flex;
+    flex-flow: column;
     width: 100%;
     height: 100%;
     background-color: orange;
@@ -109,8 +162,38 @@
     padding: 0;
     background-color: yellow;
   }
+  .step-label {
+    font-family: "Times New Roman", Times, serif;
+  }
+  .inputs-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+    background-color: red;
+  }
+  .form-spacer {
+    height: 5%; 
+  }
+  .section-description-label {
+    font-size: 18px;
+  }
   .input-fields {
     color: black;
+  }
+  .dates-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 50%;
+    background-color: pink;
+  }
+  .dates-cell {
+    display: flex;
+    justify-content: center;
+    width: 45%;
+    background-color: yellow;
   }
   .buttons-container {
     display: flex;
