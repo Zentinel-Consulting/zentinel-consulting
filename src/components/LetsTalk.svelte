@@ -117,6 +117,7 @@
     font-size: 18px;
     background-color: transparent;
     border: 2px solid black;
+    border-radius: 20px;
     cursor: pointer;
   }
   @media only screen and (max-width: 400px){
