@@ -7,6 +7,7 @@
 	  import ProjectApproach from "../components/ProjectApproach.svelte";
 	  import TeamTrajectory from "../components/TeamTrajectory.svelte";
 	  import LetsTalk from "../components/LetsTalk.svelte";
+    import Footer from "../components/Footer.svelte";
   
   </script>
   
@@ -19,6 +20,7 @@
     <ProjectApproach />
     <TeamTrajectory />
     <LetsTalk />
+    <Footer />
   </div>
   
   
