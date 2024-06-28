@@ -138,8 +138,8 @@
             class="socialn-list"
           >
             <a href="#">Twitter</a>
-            <a href="#">Facebook</a>
-            <a href="#">GitHub</a>
+            <a href="https://www.instagram.com/zentinel.dev/">Instagram</a>
+            <a href="https://github.com/Zentinel-Consulting">GitHub</a>
             <a href="#">LinkedIn</a>
           </div>
         </div>
