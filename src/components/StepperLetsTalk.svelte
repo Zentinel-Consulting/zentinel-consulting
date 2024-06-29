@@ -94,6 +94,16 @@
             <div class="form-spacer"/>
             <p class="section-description-label">Tell us about your vision. What type of service are you looking for, and give us a brief description of your dream project.</p>
             <div class="form-spacer"/>
+            <div
+              class="tag-list-holder"
+            >
+              <FormInput type_t="tag_list" />
+            </div>
+            <div
+              class="description-holder"
+            >
+              <textarea placeholder="I'm looking for a ..."></textarea>
+            </div>
           </div>
         </div>
       {/if}
@@ -118,7 +128,6 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
-    background-color: pink;
   }
   .stepper-container {
     display: flex;
@@ -127,7 +136,6 @@
     justify-content: space-between;
     width: 100%;
     height: 5%;
-    background-color: green;
   }
   .step-line {
     width: 20%;
@@ -140,7 +148,6 @@
     align-items: start;
     width: 100%;
     height: 95%;
-    background-color: red;
   }
   .input-fields {
     display: flex;
@@ -148,35 +155,31 @@
     align-items: start;
     width: 100%;
     height: 100%;
-    background-color: blue;
   }
   .step-content {
     display: flex;
     flex-flow: column;
     width: 100%;
     height: 100%;
-    background-color: orange;
   }
   .step-content p {
     margin: 0;
     padding: 0;
-    background-color: yellow;
   }
   .step-label {
-    font-family: "Times New Roman", Times, serif;
+    font-size: 30px;
   }
   .inputs-container {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     width: 100%;
-    background-color: red;
   }
   .form-spacer {
     height: 5%; 
   }
   .section-description-label {
-    font-size: 18px;
+    font-size: 15px;
   }
   .input-fields {
     color: black;
@@ -187,13 +190,11 @@
     justify-content: space-evenly;
     width: 100%;
     height: 50%;
-    background-color: pink;
   }
   .dates-cell {
     display: flex;
     justify-content: center;
     width: 45%;
-    background-color: yellow;
   }
   .buttons-container {
     display: flex;
@@ -202,7 +203,6 @@
     justify-content: space-between;
     width: 100%;
     height: 10%;
-    background-color: brown;
   }
   .button-obj {
     padding: 10px 20px;
@@ -216,6 +216,27 @@
   .button-obj:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+  .tag-list-holder {
+    width: 100%;
+  }
+  .description-holder {
+    width: 100%;
+    height: 40%;
+  }
+  .description-holder textarea {
+    padding: 10px 20px;
+    font-size: 18px;
+    width: 100%; 
+    height: 100%;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 3px;
+    cursor: pointer;
+    box-sizing: border-box;
+    resize: none;
+    outline: none;
+    font-family: Arial, sans-serif;
   }
 </style>
 

@@ -122,7 +122,7 @@
     width: 14%;
     text-align: center;
     border-radius: 4px;
-    border: 2px solid black;
+    border: 1px solid black;
     line-height: 80%;
     margin: 0;
     padding: 0;

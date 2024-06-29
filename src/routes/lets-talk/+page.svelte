@@ -45,6 +45,5 @@
   .form-holder {
     height: 80%;
     width: 60%;
-    background-color: gray;
   }
 </style>
