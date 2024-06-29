@@ -1,5 +1,7 @@
 <script>
   import DatePicker from "./DatePicker.svelte";
+  import RangeSlider from "./RangeSlider.svelte";
+
   export let type_t = "text";
   export let id_t = "name";
   export let name_t = "name";
@@ -66,8 +68,12 @@
       </button>
     {/each}
   </div>
-{:else}
-
+{:else if type_t === "slider"}
+  <div
+    class="slider-holder"
+  >
+    <RangeSlider />
+  </div>
 {/if}
 
 <style>
@@ -147,5 +153,12 @@
   .tag-list-holder button.selected {
     background-color: black;
     color: white;
+  }
+  .slider-holder {
+    width: 100%;
+    height: 100%;
+  }
+  .slider-holder input {
+    width: 100%;
   }
 </style>

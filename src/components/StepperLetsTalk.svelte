@@ -108,7 +108,28 @@
         </div>
       {/if}
       {#if currentStep === 3}
-        <p in:fade={{ duration: 300 }} out:fade={{ duration: 300 }}>Content for Step 4</p>
+        <div
+          class="step-content"
+          in:fade={{ duration: 300 }}
+          out:fade={{duration: 300 }}
+        >
+          <p class="step-label">Budget Estimation</p>
+          <div
+            class="inputs-container"
+          >
+            <div class="form-spacer"/>
+            <p class="section-description-label">Got a budget in mind? Let us know what you're thinking so we can tailor our proposal to fit your needs.</p>
+            <div class="form-spacer"/>
+            <div
+              class="slider-holder"
+            >
+              <FormInput type_t="slider"/>
+            </div>
+            <div class="form-spacer"/>
+            <p class="step-label">Lets make this happen!</p>
+            <p class="section-description-label">We are happy to get this going :)</p>
+          </div>
+        </div>
       {/if}
     </div>
     <div class="buttons-container">
@@ -237,6 +258,10 @@
     resize: none;
     outline: none;
     font-family: Arial, sans-serif;
+  }
+  .slider-holder {
+    width: 100%;
+    height: 30%;
   }
 </style>
 
