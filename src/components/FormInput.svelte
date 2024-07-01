@@ -97,7 +97,7 @@
     padding-left: 0.8em;
     padding-right: 0.8em;
     background-color: transparent;
-    border: 2px solid black;
+    border: 1px solid black;
     border-radius: 5px;
     box-sizing: border-box;
   }
@@ -145,7 +145,7 @@
     margin-left: 2px;
     font-size: 18px;
     background-color: transparent;
-    border: 2px solid black;
+    border: 1px solid black;
     border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;

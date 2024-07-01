@@ -128,6 +128,13 @@
             <div class="form-spacer"/>
             <p class="step-label">Lets make this happen!</p>
             <p class="section-description-label">We are happy to get this going :)</p>
+            <div
+              class="send-button-holder"
+            >
+              <button class="button-obj" >
+                Send 
+              </button>
+            </div>
           </div>
         </div>
       {/if}
@@ -230,7 +237,7 @@
     font-size: 18px;
     width: 200px;
     background-color: transparent;
-    border: 2px solid black;
+    border: 1px solid black;
     border-radius: 20px;
     cursor: pointer;
   }
@@ -251,7 +258,7 @@
     width: 100%; 
     height: 100%;
     background-color: transparent;
-    border: 2px solid black;
+    border: 1px solid black;
     border-radius: 3px;
     cursor: pointer;
     box-sizing: border-box;
@@ -260,6 +267,13 @@
     font-family: Arial, sans-serif;
   }
   .slider-holder {
+    width: 100%;
+    height: 30%;
+  }
+  .send-button-holder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 30%;
   }
