@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { tweened } from 'svelte/motion';
   import { cubicInOut } from 'svelte/easing';
   
@@ -24,7 +24,7 @@
     isHovered = false;
   }
 
-  function updateButtonRect(node) {
+  function updateButtonRect(node: HTMLButtonElement) {
     buttonRect = node.getBoundingClientRect();
   }
 </script>
@@ -53,7 +53,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100vw;
     height: 100vh;
     background-color: white;
     position: relative;

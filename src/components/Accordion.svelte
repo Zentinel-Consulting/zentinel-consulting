@@ -38,7 +38,8 @@
     cursor: pointer;
     width: 100%;
     border-radius: 0.8rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(128, 122, 122, 0.1);
+    border-color: #000000;
   }
 
   .toggle-icon {

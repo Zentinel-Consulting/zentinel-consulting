@@ -75,7 +75,7 @@
               <span class="arrow">&larr;</span>
           </a>
           <a href="/" class="menu-nav-link">
-            <span class="link-text">login</span>
+            <span class="link-text">about</span>
             <span class="arrow">&larr;</span>
         </a>
       </div>

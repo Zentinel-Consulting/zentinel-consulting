@@ -135,7 +135,6 @@
         display: flex;
         justify-content: space-around;
         align-items: flex-end;
-        height: 100vh;
         background-color: transparent;
         z-index: 10;
     }
@@ -147,7 +146,8 @@
         align-items: center;
         width: 100%;
         height: 80%;
-        padding-bottom: 2rem;
+        padding-bottom: 6rem;
+        padding-top: 6rem;
         background-color: white;
         border-radius: 1.2rem;
         overflow: hidden;
