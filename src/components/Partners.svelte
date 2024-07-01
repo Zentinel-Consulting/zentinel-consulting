@@ -26,8 +26,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 100%;
-        height: 100vh;
         background-color: transparent;
     }
 
@@ -39,7 +37,7 @@
         width: 100%;
         height: 10%;
         color: white;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         margin-top: 2rem;
     }
 
@@ -47,8 +45,9 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 5rem;
-        height: 85%;
-        margin-top: 2rem;
+        margin-top: 8rem;
+        margin-bottom: 8rem;
+        flex-grow: 1;
     }
 
     .partner {
@@ -56,7 +55,7 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        height: 10%;
+        height: 100%;
         background-color: transparent;
         border: none;
 

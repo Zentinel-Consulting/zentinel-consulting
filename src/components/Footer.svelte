@@ -177,7 +177,6 @@
 <style>
   .main-container {
     background-color: white;
-    width: 100vw;
     height: 150vh;
     display: flex;
     flex-direction: column;

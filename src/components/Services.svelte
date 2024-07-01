@@ -149,6 +149,7 @@
 		position: relative;
 		overflow: hidden;
 		transition: color 0.3s;
+		z-index: 1;
 	}
 
 	.start-button button::before {
