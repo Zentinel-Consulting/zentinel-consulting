@@ -146,4 +146,30 @@
     padding: 0;
     margin: 0;
   }
+  
+  @media only screen and (max-width: 1250px){
+    .paragraph-container p{
+      font-size: 17px;
+    } 
+  }
+  @media only screen and (max-width: 1200px){
+    .card-container{
+      width: 35%;
+    }
+  }
+  @media only screen and (max-width: 700px){
+    .card-container{
+      width: 45%;
+    }
+  }
+  @media only screen and (max-width: 500px){
+    .row-container {
+      justify-content: center;
+    }
+    .card-container {
+      width: 80%;
+      background-color: red;
+      margin-right: 0%;
+    }
+  }
 </style>

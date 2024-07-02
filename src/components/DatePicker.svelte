@@ -148,4 +148,16 @@
     cursor: not-allowed;
     opacity: 0.5;
   }
+  @media only screen and (max-width: 750px){
+    td, th {
+      font-size: 12px;
+      width: 14%;
+      text-align: center;
+      border-radius: 4px;
+      border: 1px solid black;
+      line-height: 80%;
+      margin: 0;
+      padding: 0;
+    }
+  }
 </style>

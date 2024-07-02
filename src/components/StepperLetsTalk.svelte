@@ -411,5 +411,52 @@
     width: 100%;
     height: 30%;
   }
-</style>
+  @media only screen and (max-width: 1250px){
+    .dates-row {
+      justify-content: space-between;
+    }
+  }
+  @media only screen and (max-width: 1100px){
+    .dates-row {
+      height: 40%;
+    }
+  }
+  @media only screen and (max-width: 1200px){
+    .button-obj {
+      width: 150px;
 
+    }
+  }
+  @media only screen and (max-width: 650px){
+    .dates-row {
+      flex-direction: column;
+      align-items: center;
+      height: 70%;
+    }
+    .dates-cell {
+      height: 48%;
+      width: 60%;
+    }
+  }
+  @media only screen and (max-width: 550px){
+    .button-obj {
+      width: 100px;
+      font-size: 14px;
+
+    }
+    .dates-cell {
+      width:65%;
+    }
+  }
+  @media only screen and (max-width: 700px),
+              screen and (max-height: 900px){
+    .tag-list-holder {
+      overflow-y: scroll;
+    }
+  }
+  @media only screen and (max-width: 700px) {
+    .tag-list-holder {
+      height: 30%;
+    }
+  }
+</style>

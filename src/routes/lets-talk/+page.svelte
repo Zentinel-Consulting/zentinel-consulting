@@ -2,11 +2,6 @@
   import StepperLetsTalk from "../../components/StepperLetsTalk.svelte";
   import CommentCard from "../../components/CommentCard.svelte";
 
-  let list_comments = [
-    {"comment":"Zentinel Consulting Group is just the best consulting company.", "person": "Google"},
-    {"comment":"They are the best in web design.", "person": "Alfonso"},
-    {"comment":"The product Zentinel delivered has bringed more clients to my bussines.", "person": "Alfonso"},
-  ];
 </script>
 
 <div
@@ -76,5 +71,18 @@
   .card-container {
     width: 80%; 
     height: 80%;
+  }
+  @media only screen and (max-width: 900px){
+    .placeholder-container {
+      display: none;
+    }
+    .form-container {
+      width: 100%;
+    }
+  }
+  @media only screen and (max-width: 600px){
+    .form-holder {
+      width: 80%;
+    }
   }
 </style>
