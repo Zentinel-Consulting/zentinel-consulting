@@ -2,11 +2,69 @@
   import { fade } from 'svelte/transition';
   import FormInput from "./FormInput.svelte";
 
+  let formData = {
+    name: '',
+    lastname: '',
+    email: '',
+    company: '',
+    jobTitle: '',
+    startDate: '',
+    endDate: '',
+    selectedTags: [],
+    description: '',
+    start_budget: 0,
+    end_budget: 0
+  };
+
+  let minRangeValue_t = 40;
+  let maxRangeValue_t = 1000;
+
+  let tag_options_t = [
+    {"label":"Web Design", "selected": false},
+    {"label":"Data Science", "selected": false},
+    {"label":"SEO", "selected": false},
+    {"label":"Cloud Solutions", "selected": false},
+    {"label":"Automation", "selected": false},
+    {"label":"Consulting", "selected": false},
+    {"label":"Branding", "selected": false},
+    {"label":"UI", "selected": false},
+    {"label":"Migration", "selected": false},
+    {"label":"Native App", "selected": false},
+    {"label":"Web App", "selected": false},
+    {"label":"Portfolio", "selected": false},
+    {"label":"AI", "selected": false},
+    {"label":"Machine Learning", "selected": false},
+    {"label":"Networking", "selected": false},
+    {"label":"Project Management", "selected": false},
+  ];
+
+
+
+  let today = new Date();
+  let tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 1);
+
+  // Format dates for input fields
+  let formattedToday = today.toISOString().slice(0, 10);
+  let formattedTomorrow = tomorrow.toISOString().slice(0, 10);
+
+
+
   let list_steps = Array.from({ length: 4 }, (value, index) => index);
   let currentStep = 0;
 
   function nextStep() {
     if(currentStep === 0 && checkFirstStep()===false) {
+      return;
+    }
+    if(currentStep === 1 && checkSecondStep()===false) {
+      return;
+    }
+    if(currentStep === 2 && checkThirdStep()===false) {
+      return;
+    }
+    if(currentStep === 3) {
+      checkFourthStep();
       return;
     }
     if (currentStep < list_steps.length - 1) {
@@ -20,22 +78,65 @@
     }
   }
 
+  // First step form management
   let name_input_fi;
   let lastname_input_fi;
   let email_input_fi;
   let company_input_fi;
   let job_title_input_fi;
   function checkFirstStep() {
-    let  nifi = name_input_fi.validateInput();
-    let  lnifi = lastname_input_fi.validateInput();
-    let  eifi = email_input_fi.validateInput();
-    let  cifi = company_input_fi.validateInput();
-    let  jtifi = job_title_input_fi.validateInput();
+    let  nifi   = name_input_fi.validateInput();
+    let  lnifi  = lastname_input_fi.validateInput();
+    let  eifi   = email_input_fi.validateInput();
+    let  cifi   = company_input_fi.validateInput();
+    let  jtifi  = job_title_input_fi.validateInput();
     if(nifi && lnifi && eifi && cifi && jtifi){
-      console.log("done");
+      formData["name"]      = name_input_fi.getInputValue();
+      formData["lastname"]  = lastname_input_fi.getInputValue();
+      formData["email"]     = email_input_fi.getInputValue();
+      formData["company"]   = company_input_fi.getInputValue();
+      formData["jobTitle"]  = job_title_input_fi.getInputValue();
       return true;
     }
     return false;
+  }
+
+  // Second Step Form Management
+  let start_date_fi;
+  let end_date_fi;
+  function checkSecondStep() {
+    let startDate = new Date(start_date_fi.getSelectedDate());
+    let endDate = new Date(end_date_fi.getSelectedDate());
+
+    if (startDate < endDate) {
+      formData["startDate"] = start_date_fi.getSelectedDate();
+      formData["endDate"] = end_date_fi.getSelectedDate();
+      formattedToday = start_date_fi.getSelectedDate();
+      formattedTomorrow = end_date_fi.getSelectedDate();
+      return true; 
+    }
+    alert("Start date must be before the end date.");
+    return false; 
+  }
+
+  // Third step form management
+  let tag_list_fi;
+  let textarea_fi;
+  function checkThirdStep() {
+    let tlfi = tag_list_fi.validateTags();
+    if(tlfi){
+      formData["selectedTags"] = tag_list_fi.getSelectedTags();
+      formData["description"] = textarea_fi.getInputValue();
+      tag_options_t = tag_list_fi.getUpdateTags();
+      return true;
+    }
+      return false;
+  }
+
+  function checkFourthStep() {
+    formData["start_budget"] = minRangeValue_t;
+    formData["end_budget"] = maxRangeValue_t;
+    console.log(formData);
   }
 </script>
 
@@ -64,15 +165,15 @@
             <div class="form-spacer"/>
             <p class="section-description-label">Tell us a bit about yourself so we can connect and collaborate. Your name, email, and a bit about where you work will do the trick!</p>
             <div class="form-spacer"/>
-            <FormInput bind:this={name_input_fi} placeholder_t="What's your name?" type_t="text-name"/>
+            <FormInput  inputValue={formData["name"]} bind:this={name_input_fi} placeholder_t="What's your name?" type_t="text-name" />
             <div class="form-spacer"/>
-            <FormInput bind:this={lastname_input_fi} placeholder_t="What's your last name?" type_t="text-name"/>
+            <FormInput inputValue={formData["lastname"]} bind:this={lastname_input_fi} placeholder_t="What's your last name?" type_t="text-name"/>
             <div class="form-spacer"/>
-            <FormInput bind:this={email_input_fi} placeholder_t="What's your email?" type_t="email"/>
+            <FormInput inputValue={formData["email"]} bind:this={email_input_fi} placeholder_t="What's your email?" type_t="email"/>
             <div class="form-spacer"/>
-            <FormInput bind:this={company_input_fi} placeholder_t="What's the name of your company?" type_t="text-company"/>
+            <FormInput inputValue={formData["company"]} bind:this={company_input_fi} placeholder_t="What's the name of your company?" type_t="text-company"/>
             <div class="form-spacer"/>
-            <FormInput bind:this={job_title_input_fi} placeholder_t="What's your job title?" type_t="text-job-title"/>
+            <FormInput inputValue={formData["jobTitle"]} bind:this={job_title_input_fi} placeholder_t="What's your job title?" type_t="text-job-title"/>
           </div>
         </div>
       {/if}
@@ -93,10 +194,10 @@
               class="dates-row"
             >
               <div class="dates-cell">
-                <FormInput type_t="date" />
+                <FormInput bind:this={start_date_fi} type_t="date" selectedDate={formattedToday} />
               </div>
               <div class="dates-cell">
-                <FormInput type_t="date" />
+                <FormInput bind:this={end_date_fi} type_t="date" selectedDate={formattedTomorrow}/>
               </div>
             </div>
           </div>
@@ -118,12 +219,12 @@
             <div
               class="tag-list-holder"
             >
-              <FormInput type_t="tag_list" />
+              <FormInput bind:this={tag_list_fi} type_t="tag_list" tag_options_t={tag_options_t} />
             </div>
             <div
               class="description-holder"
             >
-              <FormInput type_t="textarea"/>
+              <FormInput bind:this={textarea_fi} inputValue={formData["description"]} type_t="textarea"/>
             </div>
           </div>
         </div>
@@ -144,7 +245,7 @@
             <div
               class="slider-holder"
             >
-              <FormInput type_t="slider"/>
+              <FormInput type_t="slider" bind:minRangeValue_t={minRangeValue_t} bind:maxRangeValue_t={maxRangeValue_t}/>
             </div>
             <div class="form-spacer"/>
             <p class="step-label">Lets make this happen!</p>
@@ -152,7 +253,7 @@
             <div
               class="send-button-holder"
             >
-              <button class="button-obj" >
+              <button class="button-obj" on:click={checkFourthStep}>
                 Send 
               </button>
             </div>

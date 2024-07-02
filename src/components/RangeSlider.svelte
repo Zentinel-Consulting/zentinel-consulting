@@ -1,12 +1,15 @@
 <script>
-  let minRange = 50;
-  let maxRange = 1000;
+  export let minRange = 50;
+  export let maxRange = 1000;
   const minRangeValueGap = 6;
   const max = 1000;
 
   $: rangeStyle = `left: ${(minRange / max) * 100}%; right: ${100 - (maxRange / max) * 100}%`;
   $: minBubbleStyle = `left: ${(minRange / max) * 100}%; transform: translate(-${(minRange / max) * 50}%, -100%)`;
   $: maxBubbleStyle = `right: ${100 - (maxRange / max) * 100}%; transform: translate(${(100 - (maxRange / max) * 100) / 2}%, 100%)`;
+
+  $: minRange;
+  $: maxRange;
 
   function handleInput(event) {
     const { target } = event;

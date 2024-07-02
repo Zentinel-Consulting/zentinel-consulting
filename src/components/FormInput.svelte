@@ -7,6 +7,9 @@
   export let name_t = "name";
   export let placeholder_t = "What's your name?";
 
+  export let minRangeValue_t = 50;
+  export let maxRangeValue_t = 1000;
+
   export let sended_ones = false;
 
   export let tag_options_t = [
@@ -16,28 +19,39 @@
     {"label":"Cloud Solutions", "selected": false},
     {"label":"Automation", "selected": false},
     {"label":"Consulting", "selected": false},
-    {"label":"Branding", "selected": false},
-    {"label":"UI", "selected": false},
-    {"label":"Migration", "selected": false},
-    {"label":"Native App", "selected": false},
-    {"label":"Web App", "selected": false},
-    {"label":"Portfolio", "selected": false},
-    {"label":"AI", "selected": false},
-    {"label":"Machine Learning", "selected": false},
-    {"label":"Networking", "selected": false},
-    {"label":"Project Management", "selected": false},
   ];
 
   let tag_labels = ["WebApp", "AI", "Data Science", "Backend Services", "Cloud Solutions", "Marketing", "Web Design"];
 
-  let selectedDate = "2022-03-01";
+  export let selectedDate = "2022-03-01";
   export let inputValue = "";         // This Check the value here
   let isValid = true;
+
+  export function getInputValue() {
+    return inputValue;
+  }
+  export function getSelectedDate() {
+    return selectedDate;
+  }
 
   function toggleTag(index) {
     tag_options_t = tag_options_t.map((tag, i) => 
       i === index ? {...tag, selected: !tag.selected} : tag
     );
+  }
+  export function getSelectedTags() {
+    return tag_options_t.filter(tag => tag.selected).map(tag => tag.label);
+  }
+  export function getUpdateTags() {
+    return tag_options_t;
+  }
+
+  export function validateTags() {
+    if (getSelectedTags().length === 0) {
+      alert("Please select at least one tag."); 
+      return false;
+    }
+    return true; 
   }
 
 
@@ -94,12 +108,12 @@
   <div
     class="date-component-holder"
   >
-    <input type="text" id={id_t} name={name_t} placeholder={placeholder_t} bind:value={selectedDate}>
+    <input type="text" id={id_t} name={name_t} placeholder={placeholder_t} bind:value={selectedDate} disabled>
     <div class="date-picker-spacer"></div>
     <div
       class="date-input-field-container"
     >
-      <DatePicker bind:value={selectedDate} /> 
+      <DatePicker bind:value={selectedDate} allowPastDates={false} /> 
     </div>
   </div>
 {:else if type_t === "tag_list"}
@@ -119,12 +133,13 @@
   <div
     class="slider-holder"
   >
-    <RangeSlider />
+    <RangeSlider bind:minRange={minRangeValue_t} bind:maxRange={maxRangeValue_t}/>
   </div>
 {:else if type_t === "textarea"}
   <textarea
     placeholder="I'm looking for a ..."
     class="description-textarea"
+    bind:value={inputValue}
   ></textarea>
 {/if}
 
