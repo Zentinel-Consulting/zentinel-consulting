@@ -21,14 +21,20 @@
       visible = prevScrollPos > currentScrollPos;
       prevScrollPos = currentScrollPos;
     };
- 
+
   </script>
   
   <header class="header" class:visible >
     <div class="header-casing">
       {#if visible}
         <div out:fade>
-          <button>
+          <button 
+            on:click={
+              () => {
+                window.location.href = '/';
+              }
+            }
+          >
               <svg width="30" height="30" viewBox="0 0 70 70" fill="white" xmlns="http://www.w3.org/2000/svg" style="background-color:transparent;">
                   <path d="M49.9399 10.3376L52.7851 13.2236L13.9422 52.5244L11.097 49.6384L49.9399 10.3376Z"/>
                   <path d="M56.5219 17.4756L59.3671 20.3616L20.5242 59.6624L17.6789 56.7764L56.5219 17.4756Z"/>
@@ -62,19 +68,19 @@
 {#if isOpen}
     <div in:fly={{y:-100, duration: 1000 }} out:fade class="modal-menu">
         <div class="menu-items">
-          <a href="/" class="menu-nav-link">
+          <a href="/" class="menu-nav-link" on:click={ () => isOpen = false}>
               <span class="link-text">services</span>
               <span class="arrow">&larr;</span>
           </a>
-          <a href="/" class="menu-nav-link">
+          <a href="/" class="menu-nav-link" on:click={ () => isOpen = false}>
               <span class="link-text">our work</span>
               <span class="arrow">&larr;</span>
           </a>
-          <a href="/" class="menu-nav-link">
+          <a href="/" class="menu-nav-link" on:click={ () => isOpen = false}>
               <span class="link-text">contact</span>
               <span class="arrow">&larr;</span>
           </a>
-          <a href="/" class="menu-nav-link">
+          <a href="/about" class="menu-nav-link" on:click={ () => isOpen = false}>
             <span class="link-text">about</span>
             <span class="arrow">&larr;</span>
         </a>
