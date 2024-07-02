@@ -8,9 +8,6 @@
   $: minBubbleStyle = `left: ${(minRange / max) * 100}%; transform: translate(-${(minRange / max) * 50}%, -100%)`;
   $: maxBubbleStyle = `right: ${100 - (maxRange / max) * 100}%; transform: translate(${(100 - (maxRange / max) * 100) / 2}%, 100%)`;
 
-  $: minRange;
-  $: maxRange;
-
   function handleInput(event) {
     const { target } = event;
     if (target.classList.contains('min')) {
