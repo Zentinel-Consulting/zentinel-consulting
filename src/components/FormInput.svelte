@@ -48,7 +48,6 @@
 
   export function validateTags() {
     if (getSelectedTags().length === 0) {
-      alert("Please select at least one tag."); 
       return false;
     }
     return true; 
