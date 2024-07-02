@@ -6,6 +6,9 @@
   let currentStep = 0;
 
   function nextStep() {
+    if(currentStep === 0 && checkFirstStep()===false) {
+      return;
+    }
     if (currentStep < list_steps.length - 1) {
       currentStep++;
     }
@@ -15,6 +18,24 @@
     if (currentStep > 0) {
       currentStep--;
     }
+  }
+
+  let name_input_fi;
+  let lastname_input_fi;
+  let email_input_fi;
+  let company_input_fi;
+  let job_title_input_fi;
+  function checkFirstStep() {
+    let  nifi = name_input_fi.validateInput();
+    let  lnifi = lastname_input_fi.validateInput();
+    let  eifi = email_input_fi.validateInput();
+    let  cifi = company_input_fi.validateInput();
+    let  jtifi = job_title_input_fi.validateInput();
+    if(nifi && lnifi && eifi && cifi && jtifi){
+      console.log("done");
+      return true;
+    }
+    return false;
   }
 </script>
 
@@ -43,15 +64,15 @@
             <div class="form-spacer"/>
             <p class="section-description-label">Tell us a bit about yourself so we can connect and collaborate. Your name, email, and a bit about where you work will do the trick!</p>
             <div class="form-spacer"/>
-            <FormInput placeholder_t="What's your name?" />
+            <FormInput bind:this={name_input_fi} placeholder_t="What's your name?" type_t="text-name"/>
             <div class="form-spacer"/>
-            <FormInput placeholder_t="What's your last name?" />
+            <FormInput bind:this={lastname_input_fi} placeholder_t="What's your last name?" type_t="text-name"/>
             <div class="form-spacer"/>
-            <FormInput placeholder_t="What's your email?" />
+            <FormInput bind:this={email_input_fi} placeholder_t="What's your email?" type_t="email"/>
             <div class="form-spacer"/>
-            <FormInput placeholder_t="What's the name of your company?" />
+            <FormInput bind:this={company_input_fi} placeholder_t="What's the name of your company?" type_t="text-company"/>
             <div class="form-spacer"/>
-            <FormInput placeholder_t="What's your job title?" />
+            <FormInput bind:this={job_title_input_fi} placeholder_t="What's your job title?" type_t="text-job-title"/>
           </div>
         </div>
       {/if}
@@ -102,7 +123,7 @@
             <div
               class="description-holder"
             >
-              <textarea placeholder="I'm looking for a ..."></textarea>
+              <FormInput type_t="textarea"/>
             </div>
           </div>
         </div>
@@ -251,20 +272,6 @@
   .description-holder {
     width: 100%;
     height: 40%;
-  }
-  .description-holder textarea {
-    padding: 10px 20px;
-    font-size: 18px;
-    width: 100%; 
-    height: 100%;
-    background-color: transparent;
-    border: 1px solid black;
-    border-radius: 3px;
-    cursor: pointer;
-    box-sizing: border-box;
-    resize: none;
-    outline: none;
-    font-family: Arial, sans-serif;
   }
   .slider-holder {
     width: 100%;

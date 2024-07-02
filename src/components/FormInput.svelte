@@ -2,10 +2,13 @@
   import DatePicker from "./DatePicker.svelte";
   import RangeSlider from "./RangeSlider.svelte";
 
-  export let type_t = "text";
+  export let type_t = "text-name";
   export let id_t = "name";
   export let name_t = "name";
   export let placeholder_t = "What's your name?";
+
+  export let sended_ones = false;
+
   export let tag_options_t = [
     {"label":"Web Design", "selected": false},
     {"label":"Data Science", "selected": false},
@@ -28,6 +31,8 @@
   let tag_labels = ["WebApp", "AI", "Data Science", "Backend Services", "Cloud Solutions", "Marketing", "Web Design"];
 
   let selectedDate = "2022-03-01";
+  export let inputValue = "";         // This Check the value here
+  let isValid = true;
 
   function toggleTag(index) {
     tag_options_t = tag_options_t.map((tag, i) => 
@@ -35,13 +40,55 @@
     );
   }
 
+
+  export function validateInput() {
+    if (type_t === "email") {
+      // More comprehensive and strict email regex
+      const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+      isValid = emailRegex.test(inputValue) && inputValue.includes('@') && inputValue.includes('.');
+    } else if (type_t === "text-name" || type_t === "text-job-title") {
+      // Allow letters, spaces, hyphens, and apostrophes for names and job titles
+      const nameRegex = /^[a-zA-Z\s'-]+$/;
+      isValid = nameRegex.test(inputValue) && inputValue.trim().length > 1; // Require at least 2 characters
+    } else if (type_t === "text-company") {
+      // Allow alphanumeric characters, spaces, hyphens, periods, and ampersands for company names
+      const companyRegex = /^[a-zA-Z0-9\s'&.-]+$/;
+      isValid = companyRegex.test(inputValue) && inputValue.trim().length > 1; // Require at least 2 characters
+    } else {
+      isValid = true;
+    }
+    sended_ones = true;
+    return isValid;
+  }
 </script>
 
-{#if type_t === "text"  || type_t === "email"}
+{#if type_t === "email"}
   <div
     class="text-input-field-container"
   >
-    <input type={type_t} id={id_t} name={name_t} placeholder={placeholder_t}>
+    <input 
+      type="email"
+      id={id_t}
+      name={name_t}
+      placeholder={placeholder_t}
+      bind:value={inputValue}
+      on:blur={sended_ones ? validateInput : () => {}}
+      class:invalid={!isValid}
+    >
+  </div>
+{:else if type_t === "text-name" || type_t === "text-job-title" || type_t === "text-company"}
+  <div
+    class="text-input-field-container"
+  >
+    <input 
+      type="text"
+      id={id_t}
+      name={name_t}
+      placeholder={placeholder_t}
+      bind:value={inputValue}
+      on:blur={sended_ones ? validateInput : () => {}}
+      class:invalid={!isValid}
+    >
   </div>
 {:else if type_t === "date"}
   <div
@@ -74,6 +121,11 @@
   >
     <RangeSlider />
   </div>
+{:else if type_t === "textarea"}
+  <textarea
+    placeholder="I'm looking for a ..."
+    class="description-textarea"
+  ></textarea>
 {/if}
 
 <style>
@@ -100,6 +152,10 @@
     border: 1px solid black;
     border-radius: 5px;
     box-sizing: border-box;
+  }
+  .text-input-field-container input.invalid {
+    border-color: red;
+    color: red;
   }
   .date-component-holder {
     display: flex;
@@ -160,5 +216,19 @@
   }
   .slider-holder input {
     width: 100%;
+  }
+  .description-textarea {
+    padding: 10px 20px;
+    font-size: 18px;
+    width: 100%; 
+    height: 100%;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 3px;
+    cursor: pointer;
+    box-sizing: border-box;
+    resize: none;
+    outline: none;
+    font-family: Arial, sans-serif;
   }
 </style>
