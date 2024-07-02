@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import Header from '../components/Header.svelte';
-	import MouseFollower from '../components/MouseFollower.svelte';
+	import Header from '../../components/Header.svelte';
+	import MouseFollower from '../../components/MouseFollower.svelte';
 
 	let pagePath: string;
 	$: {
@@ -33,7 +33,7 @@
 		flex-direction: column;
 		margin: 0 auto;
 		width: 100%;
-		color: white;
+		color: rgb(0, 0, 0);
 		background-color: black;
 	}
 
