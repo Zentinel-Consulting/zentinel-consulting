@@ -1,6 +1,7 @@
 <script lang="ts">
   import { tweened } from 'svelte/motion';
   import { cubicInOut } from 'svelte/easing';
+  import { goto } from '$app/navigation';
   
   let isHovered = false;
   let buttonRect;
@@ -27,6 +28,10 @@
   function updateButtonRect(node: HTMLButtonElement) {
     buttonRect = node.getBoundingClientRect();
   }
+
+  function handleClick() {
+    goto('/lets-talk');
+  }
 </script>
 
 <div class="main-container" style:--scale={$scale}>
@@ -40,6 +45,7 @@
     <button
       on:mouseenter={handleMouseEnter}
       on:mouseleave={handleMouseLeave}
+      on:click={handleClick}
       use:updateButtonRect
     >
       Start a project
