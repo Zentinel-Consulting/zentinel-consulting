@@ -21,8 +21,6 @@
     {"label":"Consulting", "selected": false},
   ];
 
-  let tag_labels = ["WebApp", "AI", "Data Science", "Backend Services", "Cloud Solutions", "Marketing", "Web Design"];
-
   export let selectedDate = "2022-03-01";
   export let inputValue = "";         // This Check the value here
   let isValid = true;
@@ -48,7 +46,6 @@
 
   export function validateTags() {
     if (getSelectedTags().length === 0) {
-      alert("Please select at least one tag."); 
       return false;
     }
     return true; 
@@ -245,5 +242,16 @@
     resize: none;
     outline: none;
     font-family: Arial, sans-serif;
+  }
+  @media only screen and (max-width: 1600px){
+    .tag-list-holder button {
+      font-size: 14px;
+      padding: 0px 20px;
+    }
+  }
+  @media only screen and (max-width: 1500px){
+    .tag-list-holder button {
+      height: 30px;
+    }
   }
 </style>

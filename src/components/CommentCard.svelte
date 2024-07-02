@@ -98,4 +98,20 @@
     padding: 0;
     margin: 0;
   }
+  @media only screen and (max-width: 1550px){
+    .comment-container p {
+      font-size: 2.7rem;
+    }
+    .name-container p{
+      font-size: 2.5rem;
+    }
+  }
+  @media only screen and (max-width: 1130px){
+    .comment-container p {
+      font-size: 2.5rem;
+    }
+    .name-container p{
+      font-size: 2.3rem;
+    }
+  }
 </style>

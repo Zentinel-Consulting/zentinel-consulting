@@ -1,6 +1,7 @@
 <script>
   import { fade } from 'svelte/transition';
   import FormInput from "./FormInput.svelte";
+  import  NotificationCard  from "./NotificationCard.svelte"
 
   let formData = {
     name: '',
@@ -55,12 +56,15 @@
 
   function nextStep() {
     if(currentStep === 0 && checkFirstStep()===false) {
+      displayNotification("Fill the blank spaces.");
       return;
     }
     if(currentStep === 1 && checkSecondStep()===false) {
+      displayNotification("Select a valid date.");
       return;
     }
     if(currentStep === 2 && checkThirdStep()===false) {
+      displayNotification("Select at list a kind of service.");
       return;
     }
     if(currentStep === 3) {
@@ -115,7 +119,6 @@
       formattedTomorrow = end_date_fi.getSelectedDate();
       return true; 
     }
-    alert("Start date must be before the end date.");
     return false; 
   }
 
@@ -138,7 +141,30 @@
     formData["end_budget"] = maxRangeValue_t;
     console.log(formData);
   }
+
+
+
+  let showNotification = false;
+  let notificationMessage = "";
+
+  function displayNotification(message) {
+    notificationMessage = message;
+    showNotification = true;
+  }
+
+  function handleNotificationClosed() {
+    showNotification = false;
+  }
 </script>
+
+
+{#if showNotification}
+  <NotificationCard 
+    message={notificationMessage}
+    on:closed={handleNotificationClosed}
+  />
+{/if}
+
 
 <div class="main-container">
   <div class="stepper-container">
@@ -385,5 +411,52 @@
     width: 100%;
     height: 30%;
   }
-</style>
+  @media only screen and (max-width: 1250px){
+    .dates-row {
+      justify-content: space-between;
+    }
+  }
+  @media only screen and (max-width: 1100px){
+    .dates-row {
+      height: 40%;
+    }
+  }
+  @media only screen and (max-width: 1200px){
+    .button-obj {
+      width: 150px;
 
+    }
+  }
+  @media only screen and (max-width: 650px){
+    .dates-row {
+      flex-direction: column;
+      align-items: center;
+      height: 70%;
+    }
+    .dates-cell {
+      height: 48%;
+      width: 60%;
+    }
+  }
+  @media only screen and (max-width: 550px){
+    .button-obj {
+      width: 100px;
+      font-size: 14px;
+
+    }
+    .dates-cell {
+      width:65%;
+    }
+  }
+  @media only screen and (max-width: 700px),
+              screen and (max-height: 900px){
+    .tag-list-holder {
+      overflow-y: scroll;
+    }
+  }
+  @media only screen and (max-width: 700px) {
+    .tag-list-holder {
+      height: 30%;
+    }
+  }
+</style>
