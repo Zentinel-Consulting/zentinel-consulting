@@ -1,7 +1,15 @@
-<script>
+<script >
   import { fade } from 'svelte/transition';
+  import { getContext } from 'svelte';
   import FormInput from "./FormInput.svelte";
   import  NotificationCard  from "./NotificationCard.svelte"
+
+  const { onSubmitForm } = getContext('onSubmitForm');
+  export function reCaptchaSubmit (){
+    console.log("Submit reCaptcha");
+    onSubmitForm();
+    return false;
+  }
 
   let formData = {
     name: '',
@@ -19,6 +27,7 @@
 
   let minRangeValue_t = 40;
   let maxRangeValue_t = 1000;
+
 
   let tag_options_t = [
     {"label":"Web Design", "selected": false},
@@ -137,9 +146,14 @@
   }
 
   function checkFourthStep() {
+    reCaptchaSubmit();
     formData["start_budget"] = minRangeValue_t;
     formData["end_budget"] = maxRangeValue_t;
-    console.log(formData);
+    if(reCaptchaSubmit()){
+      console.log(formData);
+    }else{
+      console.log("Unable to validate");
+    }
   }
 
 
@@ -156,7 +170,6 @@
     showNotification = false;
   }
 </script>
-
 
 {#if showNotification}
   <NotificationCard 
