@@ -1,8 +1,38 @@
 <script>
+  import { onMount, setContext } from "svelte";
   import StepperLetsTalk from "../../components/StepperLetsTalk.svelte";
   import CommentCard from "../../components/CommentCard.svelte";
 
+  const key = "6Ld92wYqAAAAALFO3qeUn-_r3K-mKzhoIVTFVPy8";
+  let State = {
+    idle: "idle",
+    requesting: "requesting",
+    success: "success"
+  };
+  setContext('onSubmitForm', { onSubmitForm });
+  function onSubmitForm() {
+    state = State.requesting;
+    doRecaptcha();
+    console.log("here");
+  }
+
+  let token;
+  let state = State.idle;
+  function doRecaptcha() {
+    grecaptcha.ready(function() {
+      grecaptcha.execute(key, { action: "submit" }).then(function(t) {
+        // Here I must run the server function
+        state = State.success;
+        token = t;
+      });
+    });
+  }
+
 </script>
+
+<svelte:head>
+  <script src="https://www.google.com/recaptcha/api.js?render={key}" async defer></script>
+</svelte:head>
 
 <div
  class="main-content"
@@ -26,7 +56,7 @@
     <div
       class="form-holder" 
     >
-      <StepperLetsTalk/> 
+      <StepperLetsTalk /> 
     </div>
   </div>
 </div>
