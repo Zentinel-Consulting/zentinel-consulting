@@ -180,6 +180,8 @@
     }
 
 
+
+
     @media (max-width: 768px) {
         .mission-container {
             padding-top: 1rem;
@@ -220,9 +222,9 @@
 
         .mission-image img {
             width: 100%;
-            height: auto;
+            height: 100%;
             object-fit: cover;
-            border-radius: 1rem;
+            border-radius: 0.3rem;
         }
 
         .building {
@@ -271,6 +273,23 @@
         font-weight: 700;
         text-align: center;
         margin-bottom: 1rem;
+        color: black;
+    }
+
+    .values h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+        color: black;
+    }
+
+    .values p {
+        font-size: 1.2rem;
+        font-weight: 400;
+        line-height: 1.5;
+        text-align: left;
+        color: #555;
     }
 
     .intro-text {
