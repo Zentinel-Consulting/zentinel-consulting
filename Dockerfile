@@ -20,5 +20,5 @@ RUN pnpm install --prod
 ENV NODE_ENV=production
 ENV MODELS_HOST=localhost
 USER node
-EXPOSE 3000
+EXPOSE 3001
 CMD ["node", "./build"]
