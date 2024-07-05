@@ -1,0 +1,42 @@
+name: Deploy to Google Cloud VM
+
+on:
+  push:
+    branches:
+      - main  # or your default branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Configure SSH
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      run: |
+        mkdir -p ~/.ssh/
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Deploy to VM
+      env:
+        SSH_HOST: ${{ secrets.SSH_HOST }}
+        SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+        REPO_PATH: /home/abrahamchalita/zentinel-project/zentinel-consulting
+        REPO_URL: ${{ github.server_url }}/${{ github.repository }}.git
+      run: |
+        ssh $SSH_USERNAME@$SSH_HOST << EOF
+          if [ ! -d "$REPO_PATH" ]; then
+            echo "Repository doesn't exist. Cloning..."
+            mkdir -p $(dirname "$REPO_PATH")
+            git clone $REPO_URL $REPO_PATH
+          fi
+          cd $REPO_PATH
+          git fetch origin main
+          git reset --hard origin/main
+          docker-compose down
+          docker-compose up --build -d
+        EOF
