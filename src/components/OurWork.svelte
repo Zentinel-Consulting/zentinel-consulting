@@ -333,5 +333,66 @@
         border-radius: 0.6rem;
     }
 
+    @media (max-width: 768px) {
+        .content-container {
+            max-width: 80%;
+            padding-left: 5%;
+            padding-top: 10%;
+            padding-bottom: 5%;
+        }
+
+        .content-container h1 {
+            font-size: 2rem;
+        }
+
+        .content-container p {
+            font-size: 1.2rem;
+        }
+
+        .category-filter {
+            margin-left: 5%;
+        }
+
+        .category-filter button {
+            padding: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .divider {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            margin-left: 5%;
+        }
+
+        .projects-grid {
+            gap: 1rem;
+        }
+
+        .project-card {
+            margin-left: 5%;
+            margin-right: 5%;
+            height: 20rem;
+        }
+
+        .project-card-image img {
+            border-radius: 0.3rem;
+            width: 80%;
+        }
+
+        .corner {
+            font-size: 0.8rem;
+            padding: 1rem;
+        }
+
+        .corner.arrow {
+            font-size: 1rem;
+        }
+
+        .category {
+            font-size: 0.6rem;
+            padding: 0.3rem 0.5rem;
+        }
+    }
+
     
 </style>

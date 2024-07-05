@@ -2,23 +2,33 @@
     import { fade, fly } from 'svelte/transition';
     import { onMount } from 'svelte';
 
-    let visible = false;
+    let visible = true; 
     let isOpen = false;
     let prevScrollPos = 0;
+    let isMobile = false; 
 
     onMount(() => {
-      visible = true;
-      window.addEventListener('scroll', handleScroll);
+        checkMobile(); 
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('resize', checkMobile);
     });
     
     const toggleModal = () => {
-      isOpen = !isOpen;
+        isOpen = !isOpen;
+    };
+
+    const checkMobile = () => {
+        isMobile = window.innerWidth <= 768; 
     };
 
     const handleScroll = () => {
-      const currentScrollPos = window.scrollY;
-      visible = prevScrollPos > currentScrollPos;
-      prevScrollPos = currentScrollPos;
+        const currentScrollPos = window.scrollY;
+        if (isMobile) {
+            visible = currentScrollPos <= 0 || prevScrollPos > currentScrollPos;
+        } else {
+            visible = prevScrollPos > currentScrollPos;
+        }
+        prevScrollPos = currentScrollPos;
     };
 
   </script>
@@ -223,6 +233,10 @@
             padding-left: 0rem;
             padding-right: 0rem;
             width: calc(100%); 
+        }
+
+        .header.visible {
+            transform: translateY(0);
         }
 
         .header-casing {
