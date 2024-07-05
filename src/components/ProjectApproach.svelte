@@ -188,9 +188,17 @@
   }
 
   @media (max-width: 768px) {
+    .container {
+      padding: 0;
+    }
+
     .title-container {
       padding: 1rem;
       height: auto;
+    }
+
+    .content-container {
+      padding: 2rem 1rem;
     }
 
     h1 {

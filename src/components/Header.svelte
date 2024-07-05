@@ -2,7 +2,6 @@
     import { fade, fly } from 'svelte/transition';
     import { onMount } from 'svelte';
 
-  
     let visible = false;
     let isOpen = false;
     let prevScrollPos = 0;
@@ -66,13 +65,15 @@
   </header>
   
 {#if isOpen}
-    <div in:fly={{y:-100, duration: 1000 }} out:fade class="modal-menu">
+    <div in:fly={{y:-100, duration: 1000 }} out:fade={{
+      duration: 700
+    }} class="modal-menu">
         <div class="menu-items">
-          <a href="/" class="menu-nav-link" on:click={ () => isOpen = false}>
+          <a href="/" class="menu-nav-link" on:click={toggleModal}>
               <span class="link-text">services</span>
               <span class="arrow">&larr;</span>
           </a>
-          <a href="/" class="menu-nav-link" on:click={ () => isOpen = false}>
+          <a href="/our-work" class="menu-nav-link" on:click={ () => isOpen = false}>
               <span class="link-text">our work</span>
               <span class="arrow">&larr;</span>
           </a>
@@ -80,7 +81,7 @@
               <span class="link-text">contact</span>
               <span class="arrow">&larr;</span>
           </a>
-          <a href="/about" class="menu-nav-link" on:click={ () => isOpen = false}>
+          <a href="/about" class="menu-nav-link" on:click={toggleModal}>
             <span class="link-text">about</span>
             <span class="arrow">&larr;</span>
         </a>
@@ -221,7 +222,7 @@
         .header {
             padding-left: 0rem;
             padding-right: 0rem;
-            width: calc(100% - 17px); 
+            width: calc(100%); 
         }
 
         .header-casing {

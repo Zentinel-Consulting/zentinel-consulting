@@ -5,7 +5,7 @@
 
   // Function to calculate the number of lines
   function calculateLines() {
-    const containerHeight = document.querySelector('.zebra-container').clientHeight;
+    const containerHeight = document.querySelector('.zebra-container')?.clientHeight ?? 0;
     const targetHeight = 0.9 * containerHeight; // 90% of container height
     let currentHeight = 0;
     let lineIndex = 0;
@@ -87,7 +87,7 @@
         >
           <a
             class="upward-button"
-            href="#"
+            href="/"
             on:click|preventDefault={scrollToTop}
           >
             <p>Back to Top</p>
@@ -137,10 +137,10 @@
           <div
             class="socialn-list"
           >
-            <a href="#">Twitter</a>
+            <a href="/">Twitter</a>
             <a href="https://www.instagram.com/zentinel.dev/">Instagram</a>
             <a href="https://github.com/Zentinel-Consulting">GitHub</a>
-            <a href="#">LinkedIn</a>
+            <a href="/">LinkedIn</a>
           </div>
         </div>
       </div>

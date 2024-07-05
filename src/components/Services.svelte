@@ -5,8 +5,6 @@
 	import dataanalysis from '$lib/assets/dataanalysis.webp';
 	import Accordion from './Accordion.svelte';
 
-	import Service from './Service.svelte';
-
 	let services = [
 		{
 			title: 'Web development',
@@ -19,7 +17,8 @@
 				'SEO optimization',
 				'E-commerce',
 				'Web applications',
-				'APIs'
+				'APIs',
+				'Ruby on Rails',
 			],
 			image: webdev 
 		},

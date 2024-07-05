@@ -268,13 +268,13 @@
         }
 
         .sub-container-project {
-            height: 80%;
+            padding-bottom: 2rem;
+            padding-top: 2rem;
         }
 
         .title-container {
             flex-direction: column;
             align-items: center;
-            margin-top: 1rem;
         }
 
         h2 {
@@ -292,7 +292,7 @@
         .carousel-item {
             flex: 0 0 50%;
             margin-right: 2rem;
-            margin-bottom: 1rem;
+            height: 300px;
         }
 
         .carousel-item.start {
