@@ -1,17 +1,26 @@
 <script lang="ts">
     import buildingsoftwareimg from '../lib/assets/buildingsoftware.jpg';
+    import { onMount } from 'svelte';
+    import { fade } from 'svelte/transition';
+
+    let visible: boolean = false;
+
+    onMount(() => {
+        visible = true;
+    });
 
 </script>
 
-
-<div class="about-container">
-    <div class="main-image">
-        <img src={buildingsoftwareimg} alt="building software" />
-        <div class="overlay">
-            Building innovative and scalable software solutions
+{#if visible}
+    <div class="about-container" in:fade={{ duration: 300 }}>
+        <div class="main-image">
+            <img src={buildingsoftwareimg} alt="building software" loading="eager" />
+            <div class="overlay">
+                Building innovative and scalable software solutions
+            </div>
         </div>
     </div>
-</div>
+{/if}
 
 
 <style>
@@ -23,6 +32,7 @@
         height: 70vh;
         justify-content: top;
         align-items: center;
+        will-change: opacity;
     }
 
     .main-image {
