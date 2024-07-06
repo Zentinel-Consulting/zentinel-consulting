@@ -34,7 +34,7 @@
 				'Deep learning',
 				'Computer vision',
 				'Natural language processing',
-				'Data analysis'
+				'Chatbots'
 			],
 			image: aIimage
 		},
@@ -44,10 +44,34 @@
 				'Data visualization',
 				'Data cleaning',
 				'Data processing',
-				'Data analysis',
 				'Data interpretation'
 			],
 			image: dataanalysis
+		},
+		{
+			title: 'UI/UX design',
+			points: [
+				'User interface design',
+				'User experience design',
+				'Wireframing',
+				'Prototyping',
+				'User testing',
+				'User research',
+			],
+			image: aIimage
+		},
+		{
+			title: 'Game development',
+			points: [
+				'Unity',
+				'Unreal Engine',
+				'2D games',
+				'3D games',
+				'Multiplayer games',
+				'VR games',
+				'AR games',
+			],
+			image: aIimage
 		}
 	];
 

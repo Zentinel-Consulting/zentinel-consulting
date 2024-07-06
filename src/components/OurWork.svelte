@@ -91,6 +91,11 @@
 
 	onMount(() => {
 		filterProjects('All');
+
+		projects.forEach((project) => {
+			const img = new Image();
+			img.src = project.image;
+		});
 	});
 </script>
 

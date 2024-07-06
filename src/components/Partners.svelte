@@ -73,14 +73,28 @@
 
     @media (max-width: 768px) {
         .partners-container {
-            width: 90%;
+            width: 100%;
             margin: 0 auto;
         }
 
         .partners {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0rem;
-            justify-content: center;
+            grid-template-columns: repeat(1, 1fr); 
+            gap: 0.5rem; 
+            margin-top: 4rem;
+            margin-bottom: 6rem;
+            min-height: 50vh;
+        }
+
+        .partner {
+            width: 100%;
+            height: 80%;
+            
+        }
+
+        .partner img {
+            width: 100%;
+            height: 80%;
+            object-fit: contain;
         }
 
         .title-container {
