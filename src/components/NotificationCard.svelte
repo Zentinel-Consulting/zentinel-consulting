@@ -3,6 +3,7 @@
 
   export let message = "Please fill the blank spaces.";
   export let duration = 5000; // Duration in milliseconds
+  export let line_color = "red";
 
   const dispatch = createEventDispatcher();
 
@@ -42,7 +43,7 @@
   <div class="row-container" on:click|stopPropagation> 
     <div class="card-container" on:click|stopPropagation>
       <div class="progress-line-container">
-        <div class="progress-line" class:animate={animate} style="animation-duration: {duration}ms;" on:animationend={handleAnimationEnd}></div>
+        <div class="progress-line" class:animate={animate} style="--status-color: {line_color}; animation-duration: {duration}ms;" on:animationend={handleAnimationEnd}></div>
       </div>
       <div class="content-container">
         <div class="paragraph-container">
@@ -110,7 +111,7 @@
   .progress-line {
     height: 100%;
     width: 100%; 
-    background-color: #DA1E28;
+    background-color: var(--status-color);
   }
   .progress-line.animate {
     animation: decreaseWidth 5s linear forwards;

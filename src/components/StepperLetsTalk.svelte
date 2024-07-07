@@ -5,10 +5,9 @@
   import  NotificationCard  from "./NotificationCard.svelte"
 
   const { onSubmitForm } = getContext('onSubmitForm');
-  export function reCaptchaSubmit (){
+  export async function reCaptchaSubmit (){
     console.log("Submit reCaptcha");
-    onSubmitForm();
-    return false;
+    return onSubmitForm();
   }
 
   let formData = {
@@ -22,7 +21,8 @@
     selectedTags: [],
     description: '',
     start_budget: 0,
-    end_budget: 0
+    end_budget: 0,
+    rToken: ''
   };
 
   let minRangeValue_t = 40;
@@ -145,16 +145,44 @@
       return false;
   }
 
-  function checkFourthStep() {
-    reCaptchaSubmit();
+	async function postProjectFormulary () {
+		const res = await fetch('http://localhost:5000/create/project', {
+			method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+			body: JSON.stringify({
+          first_name          :formData["name"],
+          last_name           :formData["lastname"],
+          email               :formData["email"],
+          company_name        :formData["company"],
+          job_name            :formData["jobTitle"],
+          start_date          :formData["startDate"],
+          end_date            :formData["endDate"],
+          description         :formData["description"],
+          start_budget        :formData["start_budget"],
+          end_budget          :formData["end_budget"],
+          service_option_names:formData["selectedTags"],
+          reCaptchaToken      :formData["rToken"]
+			})
+		})
+		
+		const json = await res.json()
+		const result = JSON.stringify(json)
+    console.log(result);
+    if(json["success"]===true){
+      showRecivedNotification = true;
+    }
+	}
+  // Send Function
+  async function checkFourthStep() {
     formData["start_budget"] = minRangeValue_t;
     formData["end_budget"] = maxRangeValue_t;
-    if(reCaptchaSubmit()){
-      console.log(formData);
-    }else{
-      console.log("Unable to validate");
-    }
+    formData["rToken"] = await reCaptchaSubmit();
+    console.log(formData);
+    await postProjectFormulary();
   }
+
 
 
 
@@ -169,12 +197,25 @@
   function handleNotificationClosed() {
     showNotification = false;
   }
+
+  let showRecivedNotification = false;
+  function handleRecivedNotificationClose() {
+    showRecivedNotification = false;
+  }
+
 </script>
 
 {#if showNotification}
   <NotificationCard 
     message={notificationMessage}
     on:closed={handleNotificationClosed}
+  />
+{/if}
+{#if showRecivedNotification}
+  <NotificationCard
+    message="Got it! We'll reach out."
+    on:closed={handleRecivedNotificationClose}
+    line_color="#009D71";
   />
 {/if}
 
@@ -292,7 +333,10 @@
             <div
               class="send-button-holder"
             >
-              <button class="button-obj" on:click={checkFourthStep}>
+              <button 
+                class="button-obj" 
+                on:click={checkFourthStep}
+              >
                 Send 
               </button>
             </div>
@@ -393,6 +437,7 @@
     width: 100%;
     height: 10%;
   }
+
   .button-obj {
     padding: 10px 20px;
     font-size: 18px;
@@ -400,11 +445,16 @@
     background-color: transparent;
     border: 1px solid black;
     border-radius: 20px;
+		transition: color 0.3s;
+    color: black;
     cursor: pointer;
   }
+
   .button-obj:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    background: transparent;
+    color: black;
   }
   .tag-list-holder {
     width: 100%;
@@ -423,6 +473,15 @@
     justify-content: center;
     width: 100%;
     height: 30%;
+  }
+  .send-button-holder button {
+    background: linear-gradient(to left, transparent 50%, black 50%) right;
+    background-size: 300%;
+    transition: .5s ease-out;
+  }
+  .send-button-holder button:hover{
+    color:white;
+    background-position: left;
   }
   @media only screen and (max-width: 1250px){
     .dates-row {
