@@ -3,6 +3,7 @@
   import  NotificationCard  from "./NotificationCard.svelte"
 
   let lines = [];
+  export let api_host = ""
 
   // Function to calculate the number of lines
   function calculateLines() {
@@ -82,7 +83,8 @@
     }
 
     try {
-      const response = await fetch('http://localhost:5000/create/newsletter-subscription', {
+      console.log(`http://${api_host}/create/newsletter-subscription`);
+      const response = await fetch(`http://${api_host}/create/newsletter-subscription`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
