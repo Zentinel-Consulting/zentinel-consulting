@@ -3,6 +3,7 @@
   import { getContext } from 'svelte';
   import FormInput from "./FormInput.svelte";
   import  NotificationCard  from "./NotificationCard.svelte"
+  import { goto } from '$app/navigation';
 
   const { onSubmitForm } = getContext('onSubmitForm');
   export async function reCaptchaSubmit (){
@@ -184,8 +185,6 @@
   }
 
 
-
-
   let showNotification = false;
   let notificationMessage = "";
 
@@ -201,6 +200,7 @@
   let showRecivedNotification = false;
   function handleRecivedNotificationClose() {
     showRecivedNotification = false;
+    goto('/');
   }
 
 </script>
@@ -215,7 +215,8 @@
   <NotificationCard
     message="Got it! We'll reach out."
     on:closed={handleRecivedNotificationClose}
-    line_color="#009D71";
+    line_color="#009D71"
+    lock_screen="auto"
   />
 {/if}
 

@@ -4,6 +4,7 @@
   export let message = "Please fill the blank spaces.";
   export let duration = 5000; // Duration in milliseconds
   export let line_color = "red";
+  export let lock_screen = "none";
 
   const dispatch = createEventDispatcher();
 
@@ -39,6 +40,7 @@
      class:fadeIn={animate} 
      class:fadeOut={fadeOut} 
      class:hidden={hidden} 
+     style="--lock-value: {lock_screen};"
      on:transitionend={fadeOut ? handleFadeOutEnd : null}>
   <div class="row-container" on:click|stopPropagation> 
     <div class="card-container" on:click|stopPropagation>
@@ -70,12 +72,12 @@
     z-index: 50;
     opacity: 0; 
     transition: opacity 1s ease-in-out; 
-    pointer-events: none; 
+    pointer-events: var(--lock-value); 
   }
   .main-container.fadeIn {
     opacity: 1;
     /* Only allow clicks through the main container, not its content */
-    pointer-events: none; 
+    pointer-events: var(--lock-value); 
   }
   .main-container.fadeOut {
     opacity: 0;
