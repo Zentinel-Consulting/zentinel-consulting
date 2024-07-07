@@ -4,6 +4,7 @@
   import FormInput from "./FormInput.svelte";
   import  NotificationCard  from "./NotificationCard.svelte"
   import { goto } from '$app/navigation';
+  import { onMount } from 'svelte';
 
   const { onSubmitForm } = getContext('onSubmitForm');
   export async function reCaptchaSubmit (){
@@ -30,25 +31,22 @@
   let maxRangeValue_t = 1000;
 
 
-  let tag_options_t = [
-    {"label":"Web Design", "selected": false},
-    {"label":"Data Science", "selected": false},
-    {"label":"SEO", "selected": false},
-    {"label":"Cloud Solutions", "selected": false},
-    {"label":"Automation", "selected": false},
-    {"label":"Consulting", "selected": false},
-    {"label":"Branding", "selected": false},
-    {"label":"UI", "selected": false},
-    {"label":"Migration", "selected": false},
-    {"label":"Native App", "selected": false},
-    {"label":"Web App", "selected": false},
-    {"label":"Portfolio", "selected": false},
-    {"label":"AI", "selected": false},
-    {"label":"Machine Learning", "selected": false},
-    {"label":"Networking", "selected": false},
-    {"label":"Project Management", "selected": false},
-  ];
-
+  let tag_options_t = [];
+  async function fetchServiceOptions() {
+    try {
+      const response = await fetch('http://localhost:5000/api/service-options');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      tag_options_t = data.options;
+    } catch (error) {
+      console.error('Error fetching service options:', error);
+    }
+  }
+  onMount(() => {
+    fetchServiceOptions();
+  });
 
 
   let today = new Date();
