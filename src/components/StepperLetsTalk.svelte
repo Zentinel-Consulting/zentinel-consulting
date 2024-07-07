@@ -173,6 +173,8 @@
     console.log(result);
     if(json["success"]===true){
       showRecivedNotification = true;
+    }else{
+      showRecivedErrorNotification = true;
     }
 	}
   // Send Function
@@ -203,6 +205,11 @@
     goto('/');
   }
 
+  let showRecivedErrorNotification = false;
+  function handleRecivedErrorNotificationClose() {
+    showRecivedErrorNotification = false;
+  }
+
 </script>
 
 {#if showNotification}
@@ -217,6 +224,14 @@
     on:closed={handleRecivedNotificationClose}
     line_color="#009D71"
     lock_screen="auto"
+  />
+{/if}
+{#if showRecivedErrorNotification}
+  <NotificationCard
+    message="Try again later :("
+    on:closed={handleRecivedErrorNotificationClose}
+    line_color="#FFB687"
+    lock_screen="none"
   />
 {/if}
 
