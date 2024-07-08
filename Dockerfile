@@ -4,10 +4,9 @@ WORKDIR /app
 RUN npm install -g pnpm
 
 # Stage 2: set env variables
-ARG PUBLIC_BASE_URL
-ARG PUBLIC_TYPE_HTTP
-ENV PUBLIC_BASE_URL=$PUBLIC_BASE_URL
-ENV PUBLIC_TYPE_HTTP=$PUBLIC_TYPE_HTTP
+# Create .env file
+RUN echo "PUBLIC_BASE_URL=$PUBLIC_BASE_URL" >> .env && \
+    echo "PUBLIC_TYPE_HTTP=$PUBLIC_TYPE_HTTP" >> .env
 
 # Stage 3: Build Stage, install prerequisites
 FROM base AS build
