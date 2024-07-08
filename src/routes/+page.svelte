@@ -1,6 +1,4 @@
 <script>
-  import { PUBLIC_BASE_URL } from "$env/static/public";
-
 	import Landing from '../components/Landing.svelte';
 	import Partners from '../components/Partners.svelte';
 	import UseCases from '../components/UseCases.svelte';
@@ -21,7 +19,7 @@
 	<ProjectApproach />
 	<TeamTrajectory />
 	<LetsTalk />
-	<Footer api_host={ PUBLIC_BASE_URL } />
+	<Footer />
 </div>
 
 <style>

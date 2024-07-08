@@ -1,5 +1,5 @@
 <script >
-  import { PUBLIC_BASE_URL } from "$env/static/public";
+  import { PUBLIC_BASE_URL, PUBLIC_TYPE_HTTP } from "$env/static/public";
 
   import { fade } from 'svelte/transition';
   import { getContext } from 'svelte';
@@ -36,7 +36,7 @@
   let tag_options_t = [];
   async function fetchServiceOptions() {
     try {
-      const response = await fetch(`http://${ PUBLIC_BASE_URL }/api/service-options`);
+      const response = await fetch(`${ PUBLIC_TYPE_HTTP }://${ PUBLIC_BASE_URL }/api/service-options`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -147,7 +147,7 @@
   }
 
 	async function postProjectFormulary () {
-		const res = await fetch(`http://${ PUBLIC_BASE_URL }/create/project`, {
+		const res = await fetch(`${ PUBLIC_TYPE_HTTP }://${ PUBLIC_BASE_URL }/create/project`, {
 			method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -1,9 +1,9 @@
 <script>
+  import { PUBLIC_BASE_URL, PUBLIC_TYPE_HTTP } from "$env/static/public";
   import { onMount } from 'svelte';
   import  NotificationCard  from "./NotificationCard.svelte"
 
   let lines = [];
-  export let api_host = ""
 
   // Function to calculate the number of lines
   function calculateLines() {
@@ -83,8 +83,7 @@
     }
 
     try {
-      console.log(`http://${api_host}/create/newsletter-subscription`);
-      const response = await fetch(`http://${api_host}/create/newsletter-subscription`, {
+      const response = await fetch(`${PUBLIC_TYPE_HTTP}://${PUBLIC_BASE_URL}/create/newsletter-subscription`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
