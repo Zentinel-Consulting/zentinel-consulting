@@ -1,6 +1,7 @@
 # Stage 1: Node with pnpm
 FROM node:latest AS base
 WORKDIR /app
+RUN npm install dotenv
 RUN npm install -g pnpm
 
 # Stage 2: set env variables
