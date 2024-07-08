@@ -1,9 +1,9 @@
 # Stage 1: Node with pnpm
-FROM node:lts-bullseye-slim AS base
+FROM node:latest AS base
 WORKDIR /app
 RUN npm install -g pnpm
 
-# Stage 4: set env variables
+# Stage 2: set env variables
 ARG PUBLIC_BASE_URL
 ARG PUBLIC_TYPE_HTTP
 ENV PUBLIC_BASE_URL=$PUBLIC_BASE_URL
