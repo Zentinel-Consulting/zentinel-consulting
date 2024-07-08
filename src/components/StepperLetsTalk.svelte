@@ -1,6 +1,6 @@
 <script >
-  import { PUBLIC_BASE_URL } from "$env/static/public";
-  import { PUBLIC_TYPE_HTTP } from "$env/static/public";
+  import { PUBLIC_BASE_URL } from "$env/dynamic/public";
+  import { PUBLIC_TYPE_HTTP } from "$env/dynamic/public";
 
   import { fade } from 'svelte/transition';
   import { getContext } from 'svelte';
