@@ -9,24 +9,39 @@
     requesting: "requesting",
     success: "success"
   };
-  setContext('onSubmitForm', { onSubmitForm });
-  function onSubmitForm() {
-    state = State.requesting;
-    doRecaptcha();
-    console.log("here");
-  }
 
   let token;
   let state = State.idle;
-  function doRecaptcha() {
-    grecaptcha.ready(function() {
-      grecaptcha.execute(key, { action: "submit" }).then(function(t) {
-        // Here I must run the server function
-        state = State.success;
-        token = t;
+
+  async function doRecaptcha() {
+    return new Promise((resolve, reject) => {
+      grecaptcha.ready(function() {
+        grecaptcha.execute(key, { action: "submit" }).then(function(t) {
+          state = State.success;
+          token = t;
+          resolve(t);
+        }).catch((error) => {
+          state = State.error;
+          reject(error);
+        });
       });
     });
   }
+
+  async function onSubmitForm() {
+    state = State.requesting;
+    try {
+      token = await doRecaptcha();
+      // Here you can run the server function or any further logic
+    } catch (error) {
+      // Handle the error case
+      state = State.error;
+      console.error("Recaptcha failed", error);
+    }
+    return token;
+  }
+
+  setContext('onSubmitForm', { onSubmitForm });
 
 </script>
 

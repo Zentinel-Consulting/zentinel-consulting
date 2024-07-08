@@ -1,5 +1,7 @@
 <script>
+  import { PUBLIC_BASE_URL, PUBLIC_TYPE_HTTP } from "$env/static/public";
   import { onMount } from 'svelte';
+  import  NotificationCard  from "./NotificationCard.svelte"
 
   let lines = [];
 
@@ -66,12 +68,70 @@
     return () => window.removeEventListener('resize', calculateLines);
   });
 
+
+  let email_value;
+  let notification_email_error        = false;
+  let notification_subscribed_error   = false;
+  let notification_subscribed_success = false;
+  async function registerUserToNewsletter() {
+    // Regular expression for email validation
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!emailRegex.test(email_value)) {
+      notification_email_error = true;
+      return;
+    }
+
+    try {
+      const response = await fetch(`${PUBLIC_TYPE_HTTP}://${PUBLIC_BASE_URL}/create/newsletter-subscription`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email_value }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('Subscription successful:', data);
+      notification_subscribed_success = true;
+      
+      // Optionally, clear the email input after successful subscription
+      email_value = '';
+    } catch (error) {
+      notification_subscribed_error = true;
+      console.error('Error registering for newsletter:', error);
+    }
+  }
+
 </script>
 
 <svelte:head>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </svelte:head>
 
+{#if notification_email_error}
+  <NotificationCard 
+    message={"Incorrect email format."}
+    on:closed={() => {notification_email_error=false}}
+  />
+{/if}
+{#if notification_subscribed_error}
+  <NotificationCard 
+    message={"There was an error, please try later."}
+    on:closed={() => {notification_subscribed_error=false}}
+  />
+{/if}
+{#if notification_subscribed_success}
+  <NotificationCard 
+    message={"We got ya! :)"}
+    on:closed={() => {notification_subscribed_success=false}}
+    line_color="#009D71"
+  />
+{/if}
 
 
 <div class="main-container">
@@ -117,8 +177,8 @@
               <div
                 class="input-field-container"
               >
-                <input type="email" id="email" name="email" placeholder="Email">
-                <button><span class="material-symbols-outlined">north_east</span></button>
+                <input type="email" id="email" name="email" placeholder="Email" bind:value={email_value}>
+                <button on:click={registerUserToNewsletter}><span class="material-symbols-outlined">north_east</span></button>
               </div>
             </div>
           </div>
