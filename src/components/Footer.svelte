@@ -1,5 +1,6 @@
 <script>
-  import { PUBLIC_BASE_URL, PUBLIC_TYPE_HTTP } from "$env/static/public";
+  import { PUBLIC_BASE_URL } from "$env/static/public";
+  import { PUBLIC_TYPE_HTTP } from "$env/static/public";
   import { onMount } from 'svelte';
   import  NotificationCard  from "./NotificationCard.svelte"
 
