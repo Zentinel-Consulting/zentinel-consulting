@@ -1,6 +1,5 @@
 <script >
-  import { PUBLIC_BASE_URL } from "$env/dynamic/public";
-  import { PUBLIC_TYPE_HTTP } from "$env/dynamic/public";
+  import {variables} from "./variables.js";
 
   import { fade } from 'svelte/transition';
   import { getContext } from 'svelte';
@@ -37,7 +36,7 @@
   let tag_options_t = [];
   async function fetchServiceOptions() {
     try {
-      const response = await fetch(`${ PUBLIC_TYPE_HTTP }://${ PUBLIC_BASE_URL }/api/service-options`);
+      const response = await fetch(`${ variables.PUBLIC_TYPE_HTTP }://${ variables.PUBLIC_BASE_URL }/api/service-options`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

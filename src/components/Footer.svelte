@@ -1,6 +1,6 @@
 <script>
-  import { PUBLIC_BASE_URL } from "$env/dynamic/public";
-  import { PUBLIC_TYPE_HTTP } from "$env/dynamic/public";
+  import {variables} from "./variables.js";
+
   import { onMount } from 'svelte';
   import  NotificationCard  from "./NotificationCard.svelte"
 
@@ -84,7 +84,7 @@
     }
 
     try {
-      const response = await fetch(`${PUBLIC_TYPE_HTTP}://${PUBLIC_BASE_URL}/create/newsletter-subscription`, {
+      const response = await fetch(`${variables.PUBLIC_TYPE_HTTP}://${variables.PUBLIC_BASE_URL}/create/newsletter-subscription`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
