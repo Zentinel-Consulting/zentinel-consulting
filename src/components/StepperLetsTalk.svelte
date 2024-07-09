@@ -1,14 +1,17 @@
 <script >
+  import {variables} from "./variables.js";
+
   import { fade } from 'svelte/transition';
   import { getContext } from 'svelte';
   import FormInput from "./FormInput.svelte";
   import  NotificationCard  from "./NotificationCard.svelte"
+  import { goto } from '$app/navigation';
+  import { onMount } from 'svelte';
 
   const { onSubmitForm } = getContext('onSubmitForm');
-  export function reCaptchaSubmit (){
+  export async function reCaptchaSubmit (){
     console.log("Submit reCaptcha");
-    onSubmitForm();
-    return false;
+    return onSubmitForm();
   }
 
   let formData = {
@@ -22,32 +25,30 @@
     selectedTags: [],
     description: '',
     start_budget: 0,
-    end_budget: 0
+    end_budget: 0,
+    rToken: ''
   };
 
   let minRangeValue_t = 40;
   let maxRangeValue_t = 1000;
 
 
-  let tag_options_t = [
-    {"label":"Web Design", "selected": false},
-    {"label":"Data Science", "selected": false},
-    {"label":"SEO", "selected": false},
-    {"label":"Cloud Solutions", "selected": false},
-    {"label":"Automation", "selected": false},
-    {"label":"Consulting", "selected": false},
-    {"label":"Branding", "selected": false},
-    {"label":"UI", "selected": false},
-    {"label":"Migration", "selected": false},
-    {"label":"Native App", "selected": false},
-    {"label":"Web App", "selected": false},
-    {"label":"Portfolio", "selected": false},
-    {"label":"AI", "selected": false},
-    {"label":"Machine Learning", "selected": false},
-    {"label":"Networking", "selected": false},
-    {"label":"Project Management", "selected": false},
-  ];
-
+  let tag_options_t = [];
+  async function fetchServiceOptions() {
+    try {
+      const response = await fetch(`${ variables.PUBLIC_TYPE_HTTP }://${ variables.PUBLIC_BASE_URL }/api/service-options`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      tag_options_t = data.options;
+    } catch (error) {
+      console.error('Error fetching service options:', error);
+    }
+  }
+  onMount(() => {
+    fetchServiceOptions();
+  });
 
 
   let today = new Date();
@@ -145,17 +146,45 @@
       return false;
   }
 
-  function checkFourthStep() {
-    reCaptchaSubmit();
+	async function postProjectFormulary () {
+		const res = await fetch(`${ PUBLIC_TYPE_HTTP }://${ PUBLIC_BASE_URL }/create/project`, {
+			method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+			body: JSON.stringify({
+          first_name          :formData["name"],
+          last_name           :formData["lastname"],
+          email               :formData["email"],
+          company_name        :formData["company"],
+          job_name            :formData["jobTitle"],
+          start_date          :formData["startDate"],
+          end_date            :formData["endDate"],
+          description         :formData["description"],
+          start_budget        :formData["start_budget"],
+          end_budget          :formData["end_budget"],
+          service_option_names:formData["selectedTags"],
+          reCaptchaToken      :formData["rToken"]
+			})
+		})
+		
+		const json = await res.json()
+		const result = JSON.stringify(json)
+    console.log(result);
+    if(json["success"]===true){
+      showRecivedNotification = true;
+    }else{
+      showRecivedErrorNotification = true;
+    }
+	}
+  // Send Function
+  async function checkFourthStep() {
     formData["start_budget"] = minRangeValue_t;
     formData["end_budget"] = maxRangeValue_t;
-    if(reCaptchaSubmit()){
-      console.log(formData);
-    }else{
-      console.log("Unable to validate");
-    }
+    formData["rToken"] = await reCaptchaSubmit();
+    console.log(formData);
+    await postProjectFormulary();
   }
-
 
 
   let showNotification = false;
@@ -169,12 +198,40 @@
   function handleNotificationClosed() {
     showNotification = false;
   }
+
+  let showRecivedNotification = false;
+  function handleRecivedNotificationClose() {
+    showRecivedNotification = false;
+    goto('/');
+  }
+
+  let showRecivedErrorNotification = false;
+  function handleRecivedErrorNotificationClose() {
+    showRecivedErrorNotification = false;
+  }
+
 </script>
 
 {#if showNotification}
   <NotificationCard 
     message={notificationMessage}
     on:closed={handleNotificationClosed}
+  />
+{/if}
+{#if showRecivedNotification}
+  <NotificationCard
+    message="Got it! We'll reach out."
+    on:closed={handleRecivedNotificationClose}
+    line_color="#009D71"
+    lock_screen="auto"
+  />
+{/if}
+{#if showRecivedErrorNotification}
+  <NotificationCard
+    message="Try again later :("
+    on:closed={handleRecivedErrorNotificationClose}
+    line_color="#FFB687"
+    lock_screen="none"
   />
 {/if}
 
@@ -292,7 +349,10 @@
             <div
               class="send-button-holder"
             >
-              <button class="button-obj" on:click={checkFourthStep}>
+              <button 
+                class="button-obj" 
+                on:click={checkFourthStep}
+              >
                 Send 
               </button>
             </div>
@@ -393,6 +453,7 @@
     width: 100%;
     height: 10%;
   }
+
   .button-obj {
     padding: 10px 20px;
     font-size: 18px;
@@ -400,11 +461,16 @@
     background-color: transparent;
     border: 1px solid black;
     border-radius: 20px;
+		transition: color 0.3s;
+    color: black;
     cursor: pointer;
   }
+
   .button-obj:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    background: transparent;
+    color: black;
   }
   .tag-list-holder {
     width: 100%;
@@ -423,6 +489,15 @@
     justify-content: center;
     width: 100%;
     height: 30%;
+  }
+  .send-button-holder button {
+    background: linear-gradient(to left, transparent 50%, black 50%) right;
+    background-size: 300%;
+    transition: .5s ease-out;
+  }
+  .send-button-holder button:hover{
+    color:white;
+    background-position: left;
   }
   @media only screen and (max-width: 1250px){
     .dates-row {

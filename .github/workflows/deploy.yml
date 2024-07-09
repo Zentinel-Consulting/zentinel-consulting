@@ -25,7 +25,7 @@ jobs:
       env:
         SSH_HOST: ${{ secrets.SSH_HOST }}
         SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
-        REPO_PATH: /home/abrahamchalita/zentinel-project/zentinel-consulting
+        REPO_PATH: ${{ secrets.R_PATH }} 
         REPO_URL: ${{ github.server_url }}/${{ github.repository }}.git
       run: |
         ssh $SSH_USERNAME@$SSH_HOST << EOF
@@ -37,6 +37,7 @@ jobs:
           cd $REPO_PATH
           git fetch origin main
           git reset --hard origin/main
+          cd ../zentinel-deploy
           sudo docker compose down
           sudo docker compose build --no-cache
           sudo docker compose up -d --force-recreate
