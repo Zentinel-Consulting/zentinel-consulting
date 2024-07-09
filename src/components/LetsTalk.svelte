@@ -93,6 +93,7 @@
     flex-direction: column;
     align-items: center;
     color: black;
+    gap: 1rem;
   }
 
   .labels-container p {

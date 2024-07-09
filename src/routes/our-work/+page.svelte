@@ -4,6 +4,3 @@
 
 <OurWork />
 
-<style>
-    
-</style>

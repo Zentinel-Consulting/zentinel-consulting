@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
 
-  let lines = [];
+  let lines: { margin: number, height: number }[] = [];
 
   // Function to calculate the number of lines
   function calculateLines() {
@@ -22,7 +22,7 @@
   }
 
   // Custom easing function
-  function easeInOutCubic(t) {
+  function easeInOutCubic(t: number) {
     return t < 0.5 
       ? 4 * t * t * t 
       : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -49,9 +49,9 @@
     requestAnimationFrame(scroll);
   }
 
-  function debounce(func, wait) {
-    let timeout;
-    return function() {
+  function debounce(func: Function, wait: number) {
+    let timeout: ReturnType<typeof setTimeout>;
+    return function(this: any) {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
         func.apply(this, arguments);
@@ -176,7 +176,7 @@
 
 <style>
   .main-container {
-    background-color: white;
+    background-color: rgb(0, 0, 0);
     height: 150vh;
     display: flex;
     flex-direction: column;
@@ -192,7 +192,6 @@
     display: flex;
     flex-direction: row;
     width: 100%; 
-    height: 85%;
   }
   .upper-content-container {
     display: flex;
@@ -222,8 +221,8 @@
     text-decoration:none;
     color: white;
   }
-  .right-content {
-  }
+  /* .right-content {
+  } */
   .upper-content-middle-box-left {
     display: flex;
     justify-content: end;
@@ -236,6 +235,8 @@
     height: 50%;
     background-color: white;
     border-radius: 10px;
+    min-height: 100px;
+    height: 200px;
   }
   .newsletter-content {
     display: flex;
@@ -272,6 +273,8 @@
     border: none;
     outline: none;
     -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
   }
   .input-field-container button{
     height: 100%;
@@ -431,7 +434,10 @@
   @media only screen and (max-width: 620px){
     .upper-content {
       flex-direction: column;
+      height: 100%;
+      flex-wrap: nowrap;
     }
+    
     .upper-content .left-content {
       height: 30%;
       width: 100%;
@@ -443,10 +449,21 @@
     .newsletter-container {
       width: 95%;
       height: 90%;
+      margin-top: 1rem;
+      margin-bottom: 10rem;
     }
     .upper-content .right-content {
       width: 100%;
       justify-content: center;
+    }
+
+    .upper-content-middle-box {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .zebra-container {
+      margin-top: 1rem;
     }
   }
   @media only screen and (max-width: 400px){

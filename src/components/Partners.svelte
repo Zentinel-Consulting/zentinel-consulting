@@ -42,8 +42,8 @@
     }
 
     .partners {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        display: flex;
+        flex-direction: row;
         gap: 5rem;
         margin-top: 8rem;
         margin-bottom: 8rem;
@@ -75,27 +75,27 @@
         .partners-container {
             width: 100%;
             margin-top: 0;
-            margin-bottom: 5rem;
         }
 
         .partners {
-            grid-template-columns: repeat(1, 1fr); 
-            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 5rem;
+            margin-top: 5rem;
         }
 
         .partner {
             width: 100%;
-            height: 80%;
+            height: 100%;
             margin: 0 auto;
         }
 
         .partner img {
-            width: 100%;
-            height: 50%;
+            width: 90%;
+            height: 90%;
         }
 
         .title-container {
-            height: 5%;
             font-size: 1rem;
         }
     }

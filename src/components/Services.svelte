@@ -1,11 +1,8 @@
 <script lang="ts">
-	import aIimage from '$lib/assets/abstract.jpg';
-	import webdev from '$lib/assets/webdev.jpg';
-	import mobiledev from '$lib/assets/mobiledev.jpg';
-	import dataanalysis from '$lib/assets/dataanalysis.webp';
+
 	import Accordion from './Accordion.svelte';
 
-	let services = [
+	let services: { title: string; points: string[] }[] = [
 		{
 			title: 'Web development',
 			points: [
@@ -17,15 +14,14 @@
 				'SEO optimization',
 				'E-commerce',
 				'Web applications',
-				'APIs',
-				'Ruby on Rails',
+				'UI/UX design',
+				'Prototyping',
+				'User testing',
 			],
-			image: webdev 
 		},
 		{
 			title: 'Mobile development',
-			points: ['iOS', 'Android', 'React Native', 'Swift', 'Kotlin', 'Mobile applications', 'APIs'],
-			image: mobiledev
+			points: ['iOS', 'Android', 'React Native', 'Swift', 'Kotlin', 'Mobile applications'],
 		},
 		{
 			title: 'AI solutions',
@@ -34,31 +30,33 @@
 				'Deep learning',
 				'Computer vision',
 				'Natural language processing',
-				'Chatbots'
+				'Chatbots',
+				'Data visualization/analysis',
 			],
-			image: aIimage
 		},
 		{
-			title: 'Data analysis',
+			title: 'CRM systems',
 			points: [
-				'Data visualization',
-				'Data cleaning',
-				'Data processing',
-				'Data interpretation'
+				'Customer data management',
+				'Sales automation',
+				'Marketing automation',
+				'Customer service and support',
+				'Analytics and reporting',
+				'Integration with other systems',
+				'Customizable workflows'
 			],
-			image: dataanalysis
 		},
 		{
-			title: 'UI/UX design',
+			title: 'POS systems',
 			points: [
-				'User interface design',
-				'User experience design',
-				'Wireframing',
-				'Prototyping',
-				'User testing',
-				'User research',
+				'Sales processing and management',
+				'Inventory management',
+				'Customer management',
+				'Reports and analytics',
+				'Multi-store management',
+				'Employee management',
+				'Integration with payment gateways and other systems',
 			],
-			image: aIimage
 		},
 		{
 			title: 'Game development',
@@ -71,7 +69,6 @@
 				'VR games',
 				'AR games',
 			],
-			image: aIimage
 		}
 	];
 
@@ -116,9 +113,9 @@
 	.services-container {
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
+		align-items: stretch;
 		width: 100%;
-		height: 97vh;
+		height: 100%;
 		background-color: #f5f5f5;
 		border-radius: 2rem;
 	}
@@ -126,18 +123,22 @@
 	.left-content {
 		top: 0;
 		width: 30%;
-		height: 97vh;
 		border-top-left-radius: 2rem;
+		border-bottom-left-radius: 2rem;
 		background-color: white;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		height: auto;
 	}
 
 	.text-title {
+		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		width: 60%;
-		height: 70%;
+		width: 70%;
 		color: black;
 		font-size: 2rem;
 		margin: auto;
@@ -156,7 +157,7 @@
 		justify-content: center;
 		align-items: center;
 		width: 100%;
-		height: 10%;
+		padding-bottom: 2.5rem;
 	}
 
 	.start-button button {
@@ -197,11 +198,13 @@
 
 	.right-content {
 		width: 70%;
-		height: 97vh;
+		height: auto;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		margin-bottom: 1rem;
+		margin-top: 2rem;
 	}
 
 	.right-content::-webkit-scrollbar {
@@ -226,7 +229,7 @@
 			width: 70%;
 			height: 30%;
 			font-size: 1.5rem;
-			margin-top: 1.5rem;
+			margin-top: 5rem;
 		}
 
 		.start-button {

@@ -22,13 +22,19 @@
     };
 
     const handleScroll = () => {
-        const currentScrollPos = window.scrollY;
-        if (isMobile) {
-            visible = currentScrollPos <= 0 || prevScrollPos > currentScrollPos;
-        } else {
-            visible = prevScrollPos > currentScrollPos;
-        }
-        prevScrollPos = currentScrollPos;
+        window.requestAnimationFrame(() => {
+            const currentScrollPosition = window.scrollY;
+            
+            if (currentScrollPosition === 0) {
+                visible = true;
+            } else if (isMobile) {
+                visible = prevScrollPos > currentScrollPosition;
+            } else {
+                visible = prevScrollPos > currentScrollPosition;
+            }
+
+            prevScrollPos = currentScrollPosition;
+        })
     };
 
   </script>
@@ -79,7 +85,8 @@
       duration: 700
     }} class="modal-menu">
         <div class="menu-items">
-          <a href="/" class="menu-nav-link" on:click={toggleModal}>
+          <a href="/#services
+          " class="menu-nav-link" on:click={toggleModal}>
               <span class="link-text">services</span>
               <span class="arrow">&larr;</span>
           </a>
@@ -87,7 +94,7 @@
               <span class="link-text">our work</span>
               <span class="arrow">&larr;</span>
           </a>
-          <a href="/" class="menu-nav-link" on:click={ () => isOpen = false}>
+          <a href="/lets-talk" class="menu-nav-link" on:click={ () => isOpen = false}>
               <span class="link-text">contact</span>
               <span class="arrow">&larr;</span>
           </a>
@@ -111,12 +118,13 @@
         width: 100%;
         height: 3vh;
         z-index: 100; 
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        transform: translateY(-100%);
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        opacity: 0;
     }
 
     .header.visible {
-        transform: translateY(0);
+        opacity: 1;
+        transform: translateY(0%);
     }
 
 

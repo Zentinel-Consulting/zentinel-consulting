@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
-	import testimage from '$lib/assets/mobiledev.jpg';
+	import { goto, preloadCode } from '$app/navigation';
+	import andromeda1 from '$lib/assets/andromeda-1.png';
 
 	interface Project {
 		id: number;
@@ -15,69 +15,67 @@
 	let projects: Project[] = [
 		{
 			id: 1,
-			title: 'Project 1',
-			image: testimage,
-			year: 2021,
-			categories: ['Web', 'Mobile'],
+			title: 'Andromeda Adventure',
+			image: andromeda1,
+			year: 2023,
+			categories: ['Web', 'Mobile', 'Game development'],
 			bgColor: '#ef7c7c'
 		},
-		{
-			id: 2,
-			title: 'Project 2',
-			image: testimage,
-			year: 2020,
-			categories: ['Web', 'AI'],
-			bgColor: 'blue'
-		},
-		{
-			id: 3,
-			title: 'Project 3',
-			image: testimage,
-			year: 2019,
-			categories: ['Mobile', 'SaaS'],
-			bgColor: 'green'
-		}
 	];
+
+	let filterCategories: string[] = ['All', 'Web', 'Game development'];
 
 	let activeCategory: string = 'All';
 	let filteredProjects: Project[] = projects;
 	let isExpanding: boolean = false;
-	let expandedCard: HTMLElement | null = null;
 	let expandingProject: Project | null = null;
 
-	function expandCard(event: MouseEvent, project: Project) {
+	async function expandCard(event: MouseEvent, project: Project) {
 		if (isExpanding) return;
 
 		isExpanding = true;
 		expandingProject = project;
 		const card = event.currentTarget as HTMLElement;
-		expandedCard = card;
 
-		card.style.zIndex = '2';
-
+		const clone = card.cloneNode(true) as HTMLElement;
 		const rect = card.getBoundingClientRect();
-		const startX = rect.left + rect.width / 2;
-		const startY = rect.top + rect.height / 2;
+		clone.style.position = 'fixed';
+		clone.style.left = `${rect.left}px`;
+		clone.style.top = `${rect.top}px`;
+		clone.style.width = `${rect.width}px`;
+		clone.style.height = `${rect.height}px`;
+		clone.style.margin = '0';
+		clone.style.zIndex = '1000';
+		clone.style.transition = 'all 0.5s ease-out';
+		document.body.appendChild(clone);
 
-		const overlay = document.querySelector('.expand-overlay') as HTMLElement;
+		const overlay = document.createElement('div');
+		overlay.style.position = 'fixed';
+		overlay.style.top = '0';
+		overlay.style.left = '0';
+		overlay.style.width = '100vw';
+		overlay.style.height = '100vh';
 		overlay.style.backgroundColor = project.bgColor || '#000';
-		overlay.style.clipPath = `circle(0% at ${startX}px ${startY}px)`;
-		overlay.style.display = 'block';
+		overlay.style.zIndex = '999';
+		overlay.style.transition = 'clip-path 0.5s ease-out';
+		overlay.style.clipPath = `circle(0% at ${rect.left + rect.width/2}px ${rect.top + rect.height/2}px)`;
+		document.body.appendChild(overlay);
+
+		const nextPageUrl = `/our-work/${project.id}`;
+		await preloadCode(nextPageUrl);
+
+		requestAnimationFrame(() => {
+			overlay.style.clipPath = `circle(150% at ${rect.left + rect.width / 2}px ${rect.top + rect.height / 2}px)`;
+		});
 
 		setTimeout(() => {
-			overlay.style.clipPath = `circle(150% at ${startX}px ${startY}px)`;
-		}, 50);
+			clone.style.transform = 'translateY(-100vh) scale(0.5)';
+			clone.style.opacity = '0';
 
-		setTimeout(() => {
-			card.style.transform = 'translateY(-100vh)';
 			setTimeout(() => {
-				isExpanding = false;
-				expandingProject = null;
-				overlay.style.display = 'none';
-				card.style.transform = '';
-				goto(`/our-work/${project.id}`);
-			}, 500);
-		}, 500);
+				goto(nextPageUrl);
+			}, 500); 
+		}, 500); 
 	}
 
 	function filterProjects(category: string) {
@@ -91,11 +89,6 @@
 
 	onMount(() => {
 		filterProjects('All');
-
-		projects.forEach((project) => {
-			const img = new Image();
-			img.src = project.image;
-		});
 	});
 </script>
 
@@ -112,7 +105,7 @@
 	</div>
 	<div class="projects-container">
 		<div class="category-filter">
-			{#each ['All', 'Web', 'Mobile', 'AI', 'SaaS'] as category}
+			{#each filterCategories as category}
 				<button class:active={activeCategory === category} on:click={() => filterProjects(category)}
 					>{category}</button
 				>
@@ -145,7 +138,7 @@
 	</div>
 </div>
 
-<div class="expand-overlay"></div>
+
 
 <style>
 	.our-work-container {
@@ -255,7 +248,7 @@
 		text-align: center;
 		color: white;
 		transition:
-			transform 0.5s ease,
+			transform 2s ease,
 			box-shadow 0.3s ease;
 		margin-left: 15%;
 		margin-right: 15%;
@@ -264,17 +257,6 @@
 		background-color: transparent;
 		cursor: pointer;
 		box-shadow: none;
-	}
-
-	.expand-overlay {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
-		z-index: 1;
-		transition: clip-path 0.5s ease-out;
-		display: none;
 	}
 
 	.project-card:hover {
@@ -310,6 +292,8 @@
 	.top-left {
 		top: 0;
 		left: 0;
+		font-weight: 500;
+		font-size: 1rem;
 	}
 
 	.top-right {
@@ -337,8 +321,9 @@
 	}
 
 	.project-card-image img {
-		max-width: 100%;
+		max-width: 80%;
 		border-radius: 0.6rem;
+		transform: scale(0.5);
 	}
 
 	@media (max-width: 768px) {

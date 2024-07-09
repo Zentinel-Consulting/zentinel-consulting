@@ -8,6 +8,3 @@
 <Mission />
 <Footer />
 
-<style>
-    
-</style>

@@ -1,231 +1,306 @@
 <script lang="ts">
-    //import { PromtBox } from "zentinel-ui";
-    let words = ["dreams", "ideas", "visions", "software"];
-    let currentWordIndex = 0;
-    let displayedWord = "innovations";
-    let isDeleting = false;
-    let typingSpeed = 70; 
-    let deletingSpeed = 50;
-    let currentColor = "white";
+  import { SquareAsteriskIcon, ArrowRight } from 'lucide-svelte';
+  import { goto } from '$app/navigation';
+  
+  function handleContact() {
+    goto('/lets-talk');
+  }
 
-    function typeWord() {
-        const currentWord = words[currentWordIndex];
-
-        if (isDeleting) {
-        displayedWord = currentWord.substring(0, displayedWord.length - 1);
-        if (displayedWord === "") {
-            isDeleting = false;
-            currentWordIndex = (currentWordIndex + 1) % words.length;
-            currentColor = getRandomColor();
-        }
-        } else {
-        displayedWord = currentWord.substring(0, displayedWord.length + 1);
-        if (displayedWord === currentWord) {
-            isDeleting = true;
-            setTimeout(typeWord, 2000); 
-            return;
-        }
-        }
-
-        setTimeout(typeWord, isDeleting ? deletingSpeed : typingSpeed);
-    }
-
-    function getRandomColor() {
-      const hue = Math.floor(Math.random() * 360);
-      const saturation = 80 + Math.floor(Math.random() * 20);
-      const lightness = 50 + Math.floor(Math.random() * 10);
-      return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-    }
-
-    function initializeWord(){
-      displayedWord = words[currentWordIndex];
-      setTimeout(typeWord, typingSpeed);
-    }
-
-    initializeWord();
 </script>
 
 <div class="landing">
-    <div class="stripe"/>
-    <div class="stripe">
-      <div class="upper-landing">
-        <div class="text-container">
-          <div class="text-position">
-            <span class="we-build">We build</span>
-            <span class="moving-word" style="color: {currentColor};">{displayedWord}.</span>
-          </div>
-          <p class="idea-text">Empower your business with our innovative solutions and ideas.</p>
-      </div>
-      </div>
+    <div class="company">
+        <SquareAsteriskIcon size="20" color="white" /> WE ARE ZENTINEL
     </div>
-    <div class="stripe">
-      <!-- <div class="chat-input">
-        <input type="text" placeholder="I want a website for..." />
-      </div> -->
-      <!-- <div class="prompt-container">
-            <PromtBox
-              theme_color = "white"
-              oc_height = "100%"
-            >
-            </PromtBox>
-      </div> -->
+    <div class="main-text">
+        <span class="title one">
+            Inspiring
+        </span>
+        <span class="title two">
+          creativity,
+        </span>
+        <span class="title three">
+          driving technology
+        </span>
     </div>
-    <!-- <div class="stripe"/> -->
-  </div>
+    <div class="contact-button">
+        <button
+          on:click={handleContact}
+        >
+            CONTACT US
+            <div class="sliding-element">
+              <ArrowRight size="20" color="white" />
+            </div>
+        </button>
+    </div>
+</div>
   
   <style>
     .landing {
       position: relative;
-      /* full screen height */
       height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: top;
       align-items: center;
       background-color: transparent;
       color: white;
-      font-size: 3rem;
-      overflow: hidden;
     }
 
-    .stripe {
-      flex: 1;
-      width: 100%;
-      display: flex;
+    .company {
+      padding: 0.4rem;
+      font-size: 0.8rem;
+      font-family: 'Sentient', sans-serif;
       justify-content: center;
       align-items: center;
-      /* border: 1px solid #ffffff; */
-      z-index: 2;
+      display: flex;
+      margin-top: 12%;
+      margin-bottom: 2rem;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
-  
-    .upper-landing {
-      display: grid;
-      grid-template-columns: 100%;
-      align-items: center;
-      width: 60%;
-      padding: 0 0rem;
-    }
-  
-    .text-container {
+
+    .main-text {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-    }
-
-    /* .prompt-container{
-      width: 60%;
-      height:15vh;
-    } */
-
-    .text-position {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 0rem;
-    }
-
-    .we-build {
-      white-space: nowrap;
-    }
-
-    .moving-word {
-      white-space: nowrap;
-      margin-left: 1rem;
-    }
-
-    .idea-text {
-      line-height: 5rem;
-      font-size: 1.5rem;
-      margin-top: 1rem;
-      font-weight: 300;
-    }
-  
-
-    .text-position p span {
-      white-space: nowrap;
-    }
-  
-    /* .chat-input {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      justify-content: center;
-      width: 60%;
-      margin: 0 auto;
-    }
-  
-    .chat-input input {
       width: 100%;
-      height: 7rem;
-      font-size: 1.2rem;;
-      background-color: transparent;
-      border-color: #ffffff;
+      margin-bottom: 5%;
+    }
+
+    .title {
+      font-size: 7rem;
+      font-weight: 400;
+      line-height: 100%;
+      font-style: normal;
+      font-family: 'Sentient', sans-serif;
+    }
+
+    .one {
+      justify-content: center;
+      align-self: center;
+      display: flex;
+      margin-right: 12rem;
+    }
+
+    .two {
+      justify-content: center;
+      align-self: center;
+      display: flex;
+      margin-left: 12rem;
+      color: #00c8ff;
+    }
+
+    .three {
+      justify-content: center;
+      align-self: center;
+      display: flex;
+    }
+
+    .contact-button {
+      margin-top: 2rem;
+    }
+
+    button {
+      padding: 0.3rem 0.3rem 0.3rem 3rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      background: rgba(255, 255, 255, 0.101);
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       color: white;
-      border-width: 1.5px;
+      cursor: pointer;
+      transition: all 0.3s;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      gap: 3rem;
     }
 
-    .chat-input input::placeholder {
-      color: rgb(200, 194, 194);
-      padding-left: 1rem;
+    button:hover {
+      background: rgba(255, 255, 255, 0.3);
     }
 
-    .chat-input input:focus {
-      outline: none;
-      box-shadow: none;
-    } */
+    .sliding-element {
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 0.2rem;
+      padding: 0.8rem;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+    }
 
-  
     @media (max-width: 768px) {
-      .landing {
-        font-size: 2rem;
-        padding-top: 3rem;
+      .company {
+        margin-top: 25%;
+        margin-bottom: 5rem;
       }
-  
-      .upper-landing {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-        width: 100%;
-      }
-  
-      .text-container {
-        margin-bottom: 1rem;
-        width: 100%;
-      }
-  
-      .text-position {
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 0.5rem;
-        font-size: 1.8rem;
-      }
-
-      .moving-word {
-        margin-left: 0;
-      }
-
-      .idea-text {
-        font-size: 1.3rem;
-        line-height: 2rem;
-      }
-
-      /* .prompt-container{
-        width: 90%;
-        height: 20vh;
-      } */
       
-    
-    /* .chat-input {
-        grid-template-columns: 1fr auto;
-        padding: 1rem;
-        width: 100%;
+      .title {
+        font-size: 3rem;
+      }
+
+      .one {
+        margin-right: 6rem;
+      }
+
+      .two {
+        margin-left: 3rem;
+      }
+
+      .three {
+        margin-left: 3rem;
+      }
+
+      .contact-button {
+        margin-top: 5rem;
+      }
     }
 
-    .chat-input input {
-        height: 5rem;
-        font-size: 1rem;
-        width: 100%;
-    } */
-}
+    @media (max-width: 991px) {
+      .company {
+        margin-top: 8%;
+        margin-bottom: 5rem;
+      }
+      
+      .title {
+        font-size: 3rem;
+      }
+
+      .one {
+        margin-right: 6rem;
+      }
+
+      .two {
+        margin-left: 3rem;
+      }
+
+      .three {
+        margin-left: 3rem;
+      }
+
+      .contact-button {
+        margin-top: 5rem;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .company {
+        margin-top: 8%;
+        margin-bottom: 5rem;
+      }
+      
+      .title {
+        font-size: 3rem;
+      }
+
+      .one {
+        margin-right: 6rem;
+      }
+
+      .two {
+        margin-left: 3rem;
+      }
+
+      .three {
+        margin-left: 3rem;
+      }
+
+      .contact-button {
+        margin-top: 5rem;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .company {
+        margin-top: 8%;
+        margin-bottom: 5rem;
+      }
+      
+      .title {
+        font-size: 3rem;
+      }
+
+      .one {
+        margin-right: 6rem;
+      }
+
+      .two {
+        margin-left: 3rem;
+      }
+
+      .three {
+        margin-left: 3rem;
+      }
+
+      .contact-button {
+        margin-top: 5rem;
+      }
+    }
+
+    @media (max-width: 1440px) {
+      .company {
+        margin-top: 8%;
+        margin-bottom: 5rem;
+      }
+      
+      .title {
+        font-size: 3rem;
+      }
+
+      .one {
+        margin-right: 6rem;
+      }
+
+      .two {
+        margin-left: 3rem;
+      }
+
+      .three {
+        margin-left: 3rem;
+      }
+
+      .contact-button {
+        margin-top: 5rem;
+      }
+    }
+
+    
+    /* for a 411 x 731 */
+    @media (max-width: 411px) {
+      .company {
+        margin-top: 25%;
+        margin-bottom: 5rem;
+      }
+      
+      .title {
+        font-size: 3rem;
+      }
+
+      .one {
+        margin-right: 6rem;
+      }
+
+      .two {
+        margin-left: 3rem;
+      }
+
+      .three {
+        margin-left: 3rem;
+      }
+
+      .contact-button {
+        margin-top: 5rem;
+      }
+    }
+      
+
   </style>
