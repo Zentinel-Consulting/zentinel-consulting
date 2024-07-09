@@ -8,14 +8,14 @@
 
   let currentNumber = 0;
   const startAnimation = () => {
-    let increment = Math.ceil(cardNumber / cardNumber); // Adjust the speed of incrementing
+    let increment = Math.ceil(cardNumber / cardNumber); 
     let interval = setInterval(() => {
       currentNumber += increment;
       if (currentNumber >= cardNumber) {
         currentNumber = cardNumber;
         clearInterval(interval);
       }
-    }, 70); // Adjust the speed of the animation
+    }, 70); 
   };
 
   $: if(run_animation){
@@ -57,8 +57,7 @@
     margin: 0;
     padding: 0;
   }
-  .description-container {
-  }
+
   .description-container p {
     line-height: 2.5;
     color: #CACACA;

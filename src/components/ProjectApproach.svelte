@@ -67,8 +67,6 @@
     top: 0;
     background-color: #ffffff;
     z-index: 10;
-    padding: 2rem 1rem;
-    height: 10vh;
     border-radius: 2rem 2rem 0 0;
   }
 
@@ -77,6 +75,7 @@
     font-weight: bold;
     text-align: center;
     margin-bottom: 0.5rem;
+    margin-top: 3rem;
     color: black;
   }
 
@@ -94,8 +93,8 @@
     flex-grow: 1;
     background-color: #f3f4f6;
     padding: 3rem 1rem;
-    padding-bottom: 10rem;
-    padding-top: 10rem;
+    padding-bottom: 5rem;
+    padding-top: 5rem;
   }
 
   .steps-container {

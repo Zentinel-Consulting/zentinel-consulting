@@ -193,7 +193,7 @@
 
     .carousel {
         display: flex;
-        overflow-x: auto;
+        overflow-x: scroll;
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
         width: 100%;
@@ -201,7 +201,10 @@
         padding: 1rem 0;
         scrollbar-width: none;
         -ms-overflow-style: none;
+    }
 
+    .carousel::-webkit-scrollbar {
+        display: none;
     }
 
     .carousel-item {
