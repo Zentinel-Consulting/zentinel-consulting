@@ -252,6 +252,7 @@
     display: flex;
     flex-direction: row;
     width: 100%; 
+    height: 60%;
   }
   .upper-content-container {
     display: flex;
@@ -352,7 +353,7 @@
     display: flex;
     flex-direction: row;
     width: 100%; 
-    height: 15%;
+    height: 20%;
   }
   .socialn-list {
     display: flex;
