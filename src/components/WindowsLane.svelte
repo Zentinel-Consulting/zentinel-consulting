@@ -20,7 +20,7 @@
     const row = [];
     
     for (let i = 0; i < totalElements; i++) {
-      const isWindow = Math.random() < 0.5; // 50% chance of being a window
+      const isWindow = Math.random() < 0.3; // 50% chance of being a window
       const width = Math.floor(Math.random() * 20) + 10; // Random width between 10% and 30%
       
       if (isWindow) {
@@ -159,5 +159,11 @@
   .windows-lane::after {
     bottom: 0;
     background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+  }
+
+  @media only screen and (max-width: 1100px){
+    .windows-lane {
+      width: 100%;
+    }
   }
 </style>

@@ -128,6 +128,7 @@
   @media only screen and (max-width: 600px){
     .form-holder {
       width: 80%;
+      height: 85%;
     }
   }
 </style>

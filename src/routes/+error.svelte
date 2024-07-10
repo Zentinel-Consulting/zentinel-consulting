@@ -27,6 +27,8 @@
     align-items: center;
     background-color: black;
     color: white;
+    overflow-x: hidden;
+    overflow-y: hidden;
   }
 
   .windows-main-container {
@@ -57,4 +59,32 @@
     font-family: "Times New Roman", Times, serif;
     font-size: 30px;
   }
+
+  @media only screen and (max-width: 1100px){
+    .windows-main-container {
+      flex-direction: column;
+    }
+    .label-lane {
+      width: 100%;
+      height: 15%;
+      align-items: start;
+      padding-left: 20px;
+    }
+    .label-container {
+    }
+    .main-label {
+      font-size: 60px;
+    }
+    .second-label {
+      font-size: 15px;
+    }
+  }
+  @media only screen and (max-height: 1100px){
+  }
+@media screen and (max-width: 1100px), 
+       screen and (max-height: 430px) {
+    .label-lane {
+      height: 25%;
+    }
+}
 </style>
