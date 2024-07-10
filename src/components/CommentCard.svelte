@@ -3,20 +3,20 @@
   import { onMount } from 'svelte';
 
   let list_comments = [
-    {"comment": "Zentinel is just the best development group. They deliver.", "entity": "BlackRock"},
-    {"comment": "They always deliver efficient products.", "entity": "JP Morgan"},
-    {"comment": "Innovative solutions that transformed our workflow.", "entity": "Goldman Sachs"},
-    {"comment": "Exceptional attention to detail and robust security measures.", "entity": "Citigroup"},
-    {"comment": "Their AI-driven analytics gave us a competitive edge.", "entity": "Morgan Stanley"},
-    {"comment": "Zentinel's cloud solutions scaled seamlessly with our growth.", "entity": "Bank of America"},
-    {"comment": "Responsive support team and proactive problem-solving.", "entity": "Wells Fargo"},
-    {"comment": "Customized solutions that perfectly fit our unique needs.", "entity": "HSBC"},
-    {"comment": "Impressive ROI on all projects we've collaborated on.", "entity": "UBS"},
-    {"comment": "Their blockchain implementation revolutionized our transactions.", "entity": "Deutsche Bank"},
-    {"comment": "Zentinel's cybersecurity measures are second to none.", "entity": "Barclays"},
-    {"comment": "They consistently exceed our expectations.", "entity": "Credit Suisse"},
-    {"comment": "Cutting-edge tech with a user-friendly interface.", "entity": "BNP Paribas"},
-    {"comment": "Seamless integration with our existing systems.", "entity": "Mizuho Financial Group"}
+    {"comment": "The way to get started is to quit talking and begin doing.", "entity": "Walt Disney"},
+    {"comment": "Ideas are easy. Implementation is hard.", "entity": "Guy Kawasaki"},
+    {"comment": "The most difficult thing is the decision to act, the rest is merely tenacity.", "entity": "Amelia Earhart"},
+    {"comment": "If you're not embarrassed by the first version of your product, you've launched too late.", "entity": "Reid Hoffman"},
+    {"comment": "The best way to predict the future is to create it.", "entity": "Peter Drucker"},
+    {"comment": "Move fast and break things. Unless you are breaking stuff, you are not moving fast enough.", "entity": "Mark Zuckerberg"},
+    {"comment": "Innovation distinguishes between a leader and a follower.", "entity": "Steve Jobs"},
+    {"comment": "The biggest risk is not taking any risk.", "entity": "Sundar Pichai"},
+    {"comment": "Fail fast, fail often, but always fail forward.", "entity": "John C. Maxwell"},
+    {"comment": "Done is better than perfect.", "entity": "Sheryl Sandberg"},
+    {"comment": "The secret to getting ahead is getting started.", "entity": "Agatha Christie"},
+    {"comment": "If you're not stubborn, you'll give up on experiments too soon.", "entity": "Jeff Bezos"},
+    {"comment": "The most certain way to succeed is always to try just one more time.", "entity": "Thomas Edison"},
+    {"comment": "Courage is not the absence of fear, but the triumph over it. Do it afraid.", "entity": "Arianna Huffington"}
   ];
 
   let currentIndex = 0;
