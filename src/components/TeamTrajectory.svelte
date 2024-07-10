@@ -41,10 +41,10 @@
     >
       <div class="column-container">
         <TrajectoryCard 
-          cardNumber={30}
+          cardNumber={4}
           labeOperator={" +"}
-          cardLabel={"projects"}
-          description={"Long record of software solutions."}
+          cardLabel={"years"}
+          description={"We are a young team of passionated and dedicated developers."}
           run_animation={activateAnimation}
         />
       </div>
@@ -59,10 +59,10 @@
       </div>
       <div class="column-container">
         <TrajectoryCard 
-          cardNumber={30}
+          cardNumber={50}
           labeOperator={" +"}
-          cardLabel={"partners"}
-          description={"We have collaborated with more than 30 outstanding partners."}
+          cardLabel={"projects"}
+          description={"Through our career, we have collaborated with more than 15 parterns."}
           run_animation={activateAnimation}
         />
       </div>
